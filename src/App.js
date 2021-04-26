@@ -25,7 +25,7 @@ class App extends Component {;
     return (
       <div className="App">
         {/*관리자 페이지 컴포넌트*/}
-        <AdminPage/>
+        <UsersPage/>
         {/*이건 영업자 페이지 컴포넌트<UsersPage/>*/}
       </div>
     );
