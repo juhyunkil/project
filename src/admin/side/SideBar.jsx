@@ -29,7 +29,7 @@ const SideBar = ({ isOpen, toggle }) => (
 const submenus = [
   [
     {
-      title: "주간목표설정",
+      title: "전체매장",
       target: "shops1"
     },
     {
