@@ -34,7 +34,6 @@ function createData(num,shopName, shopNumber, address, distance,date,workID) {
 //Row 함수
 function Row(props) {
   const { row } = props;
-  //const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
   return (
