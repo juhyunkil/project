@@ -5,7 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import Main from '../pages/Main';
 import Shops1 from '../pages/Shops1';
 import Shops2 from '../pages/Shops2';
-import Shops3 from '../pages/Shops3';
+import Shop_accumulate from '../pages/Shop_accumulate';
 import Workers1 from '../pages/Workers1';
 import Workers2 from '../pages/Workers2';
 import NotFound from '../../common/NotFound';
@@ -20,7 +20,7 @@ const Content = ({ sidebarIsOpen, toggleSidebar }) => (
       <Route exact path="/main" component={() => <Main/>} />
       <Route exact path="/shops1" component={() => <Shops1/>} />
       <Route exact path="/shops2" component={() => <Shops2/>} />
-      <Route exact path="/shops3" component={() => <Shops3/>} />
+      <Route exact path="/shop_accumulate" component={() => <Shop_accumulate/>} />
       <Route exact path="/workers1" component={() => <Workers1/>} />
       <Route exact path="/workers2" component={() => <Workers2/>} />
       <Route path="*" component={NotFound}/>
