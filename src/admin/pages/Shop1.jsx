@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Shops2 extends Component {
+class Shop1 extends Component {
     render() {
         return (
             <div>
-                매장분배
+                전체매장
             </div>
         );
     }
 }
 
-export default Shops2;
+export default Shop1;

@@ -16,6 +16,9 @@ const useStyles = makeStyles({
   container: {
     maxHeight: 300,
   },
+  table: {
+    minWidth: 700,
+  },
 });
 
 //데이터 함수
@@ -104,7 +107,7 @@ export default function Accumulate_table() {
   return (
     <div>
         <TableContainer component={Paper} className={classes.container}>
-        <Table size="small" aria-label="collapsible table">
+        <Table className={classes.table} size="small" aria-label="collapsible table">
             <TableHead>
             <TableRow>
                 <TableCell>번호</TableCell>
