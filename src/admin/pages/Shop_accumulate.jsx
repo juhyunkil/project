@@ -30,12 +30,15 @@ export default function Shop_accumulate() {
     return (
       <React.Fragment>
         <Grid container spacing={3}>
-            <Grid item xs={2}>
-                지역
+            <Grid container item xs={12} >
+                <Grid item xs={2}>
+                    지역
+                </Grid>
+                <Grid item xs={10}>
+                    <input></input>
+                </Grid>
             </Grid>
-            <Grid item xs={10}>
-                <input></input>
-            </Grid>
+            
             <Grid item xs={2}>
                 매장명
             </Grid>
