@@ -67,7 +67,7 @@ export default function Shop_accumulate() {
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid container item xs={12}>
+        <Grid item xs={12}>
             <Paper className={classes.paper}>
                 <h2>2021 1분기 달성 매장 리스트</h2>
             </Paper>
