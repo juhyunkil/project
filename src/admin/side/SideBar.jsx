@@ -38,7 +38,7 @@ const submenus = [
     },
     {
       title: "누적달성매장",
-      target: "shops3"
+      target: "shop_accumulate"
     }
   ],
   [
