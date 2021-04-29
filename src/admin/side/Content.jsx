@@ -3,8 +3,10 @@ import classNames from "classnames";
 import { Container } from "reactstrap";
 import { Switch, Route } from "react-router-dom";
 import Main from '../pages/Main';
+
 import Shop1 from '../pages/Shop1';
 import ShopDistribution from '../pages/ShopDistribution';
+
 import Shop_accumulate from '../pages/Shop_accumulate';
 import Workers1 from '../pages/Workers1';
 import Workers2 from '../pages/Workers2';
@@ -20,6 +22,7 @@ const Content = ({ sidebarIsOpen, toggleSidebar }) => (
       <Route exact path="/main" component={() => <Main/>} />
       <Route exact path="/shop1" component={() => <Shop1/>} />
       <Route exact path="/ShopDistribution" component={() => <ShopDistribution/>} />
+
       <Route exact path="/shop_accumulate" component={() => <Shop_accumulate/>} />
       <Route exact path="/workers1" component={() => <Workers1/>} />
       <Route exact path="/workers2" component={() => <Workers2/>} />
