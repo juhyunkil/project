@@ -1,9 +1,11 @@
-//main
+//Shops1
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import MainCircleChart1 from '../contents/MainCircleChart1';
+import Shops1Date from '../contents/Shops1Date';
+import Shops1Search from '../contents/Shops1Search';
+import Shops1Table from '../contents/Shops1Table';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +25,17 @@ export default function Shops1() {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs>
-          <Paper className={classes.paper}> <MainCircleChart1/> </Paper>
+          <Paper className={classes.paper}> <Shops1Date/> </Paper>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>        
+        <Grid item xs>
+          <Paper className={classes.paper}> <Shops1Search/> </Paper>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>        
+        <Grid item xs>
+          <Paper className={classes.paper}><Shops1Table/> </Paper>
         </Grid>
       </Grid>
 

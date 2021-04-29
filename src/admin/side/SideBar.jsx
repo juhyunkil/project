@@ -30,11 +30,11 @@ const submenus = [
   [
     {
       title: "전체매장",
-      target: "shops1"
+      target: "shop1"
     },
     {
       title: "매장분배",
-      target: "shops2"
+      target: "ShopDistribution"
     },
     {
       title: "누적달성매장",

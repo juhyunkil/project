@@ -5,8 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Accumulate_table from "../contents/Accumulate_table";
 import Button from '@material-ui/core/Button';
-import { Divider } from '@material-ui/core';
 
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
   inputwidth:{
     width: '400px',
   },
-
-
 }));
 
 export default function Shop_accumulate() {
@@ -44,15 +42,12 @@ export default function Shop_accumulate() {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-            
             <Grid item xs={2}>
                 지역
             </Grid>
             <Grid item xs={10}>
                 <input className={classes.inputwidth}></input>
             </Grid>
-            
-            
             <Grid item xs={2}>
                 매장명
             </Grid>
@@ -110,7 +105,6 @@ export default function Shop_accumulate() {
             <Accumulate_table/>
           </Paper>
         </Grid>
-        
       </Grid>
     </div>
   );
