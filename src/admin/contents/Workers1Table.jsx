@@ -23,6 +23,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import Sales_status_Modal from '../contents/Sales_status_modal';
 
 function createData(No, UserNum, UserName, Auth, Mail, Progress) {
   return { No, UserNum, UserName, Auth, Mail, Progress };
@@ -249,6 +250,12 @@ export default function Workers1Table() {
     setSelected(newSelected);
   };
 
+  // function popmodal(id) {
+  //   return(
+  //     <Sales_status_Modal/>
+  //   )
+  // }
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -303,6 +310,7 @@ export default function Workers1Table() {
                       <TableCell align="right">{row.Auth}</TableCell>
                       <TableCell align="right">{row.Mail}  <Button variant="contained">보내기</Button></TableCell>
                       <TableCell align="right">{row.Progress}</TableCell>
+                      <Sales_status_Modal/>
                     </TableRow>
                   );
                 })}

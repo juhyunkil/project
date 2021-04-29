@@ -27,7 +27,7 @@ class App extends Component {
         {/*관리자 페이지 컴포넌트<AdminPage/>*/}
         {/*영업자 페이지 컴포넌트<UsersPage/>*/}
 
-//         <UsersPage/>
+        {/* <UsersPage/> */}
         {/* <AdminPage/> */}
 
         <AdminPage/>
