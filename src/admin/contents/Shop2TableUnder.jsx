@@ -25,10 +25,7 @@ const useStyles = makeStyles({
 //데이터 함수
 function createData(shopName, shopNumber, address, distance) {
   return {
-    shopName,
-    shopNumber,
-    address,
-    distance,
+    shopName,shopNumber,address,distance,
     history: [
       { date: '2020-01-05', workerId: '4110', process: 3 },
       { date: '2020-01-02', workerId: '1535', process: 1 },

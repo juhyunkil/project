@@ -24,9 +24,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/*관리자 페이지 컴포넌트<Adminage/>*/}
+        {/*관리자 페이지 컴포넌트<AdminPage/>*/}
         {/*영업자 페이지 컴포넌트<UsersPage/>*/}
-        <AdminPage/>
+        <UsersPage/>
       </div>
     );
   }
