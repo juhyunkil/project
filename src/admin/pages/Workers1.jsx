@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
+import Sales_status_Modal from '../contents/Sales_status_modal'
 
-class Workers1 extends Component {
-    render() {
-        return (
-            <div>
-                직원영업현황
-            </div>
-        );
-    }
+
+
+
+export default function Workers1() {
+    return(
+        <div>
+
+            <Sales_status_Modal/>
+        </div>
+    );
 }
-
-export default Workers1;
