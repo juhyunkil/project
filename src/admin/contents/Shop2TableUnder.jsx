@@ -25,10 +25,7 @@ const useStyles = makeStyles({
 //데이터 함수
 function createData(shopName, shopNumber, address, distance) {
   return {
-    shopName,
-    shopNumber,
-    address,
-    distance,
+    shopName,shopNumber,address,distance,
     history: [
       { date: '2020-01-05', workerId: '4110', process: 3 },
       { date: '2020-01-02', workerId: '1535', process: 1 },
@@ -46,6 +43,8 @@ function Row(props) {
     <React.Fragment>
       {/*메인테이블*/}  
       <TableRow className={classes.root}>
+        <TableCell padding="checkbox">
+        </TableCell>
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -135,7 +134,7 @@ export default function Shop1TableUnder() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);
-  
+
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -150,23 +149,19 @@ export default function Shop1TableUnder() {
         <TableContainer component={Paper} className={classes.container}>
         <Table className={classes.table} size="small" aria-label="collapsible table">
             <caption>할당 전 목표 설정 매장 리스트</caption>
+            
             <TableHead>
-            <TableRow>
-               {/*<TableCell padding="checkbox">
-                <Checkbox
-                    indeterminate={numSelected > 0 && numSelected < rowCount}
-                    checked={rowCount > 0 && numSelected === rowCount}
-                    onChange={onSelectAllClick}
-                    inputProps={{ 'aria-label': 'select all desserts' }}
-                />
-                </TableCell>*/} 
-                <TableCell />
-                <TableCell >매장명</TableCell>
+              <TableRow>
+                <TableCell padding="checkbox">
+                </TableCell>
+                <TableCell/>
+                <TableCell>매장명</TableCell>
                 <TableCell align="center">전화번호</TableCell>
                 <TableCell align="center">주소</TableCell>
                 <TableCell align="center">거리</TableCell>
-            </TableRow>
+              </TableRow>
             </TableHead>
+
             <TableBody>
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     return (
@@ -174,8 +169,10 @@ export default function Shop1TableUnder() {
                     );
                 })}
             </TableBody>
+
         </Table>
         </TableContainer>
+        
         <TablePagination
             component="div"
             rowsPerPageOptions={[10,20,30]}

@@ -19,13 +19,7 @@ const rows = [
   { id: 9695, name: 'park', auth: '대리', age: 20, mail:'mail.gmail.com' },
 ];
 
-function handleRowClick(e){
-    return(
-        console.log(e.row.name)
-    )
-  }  
-
-export default function Shop1Table() {
+export default function Shop2Table(props) {
   return (
     <div style={{ height:220, width: '100%' }}>
         <DataGrid 
@@ -34,7 +28,7 @@ export default function Shop1Table() {
             columns={columns}
             rowHeight={45} 
             pageSize={4}
-            onRowClick={handleRowClick}
+            onRowClick={e => props.setSelectedId(e.row.id)}
             hideFooterSelectedRowCount = {true}
         />
     </div>

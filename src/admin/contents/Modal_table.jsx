@@ -16,19 +16,16 @@ const useStyles = makeStyles({
   container: {
     maxHeight: 300,
   },
-
 });
 
 //데이터 함수
-function createData(num,shopName, shopNumber, address, distance,date,workID) {
+function createData(num,shopName, shopNumber, address, process) {
   return {
     num,
     shopName,
     shopNumber,
     address,
-    distance,
-    date,
-    workID,
+    process,
   };
 }
 
@@ -45,9 +42,8 @@ function Row(props) {
         <TableCell component="th" scope="row">{row.shopName}</TableCell>
         <TableCell align="center">{row.shopNumber}</TableCell>
         <TableCell align="center">{row.address}</TableCell>
-        <TableCell align="center">{row.distance}</TableCell>
-        <TableCell align="center">{row.date}</TableCell>
-        <TableCell align="center">{row.workID}</TableCell>
+        <TableCell align="center">{row.process}</TableCell>
+
       </TableRow>
     </React.Fragment>
   );
@@ -59,17 +55,14 @@ Row.propTypes = {
     shopName: PropTypes.string.isRequired,
     shopNumber: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
-    distance: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
-    workID: PropTypes.string.isRequired,
     num: PropTypes.number.isRequired,
-
+    process: PropTypes.number.isRequired,
   }).isRequired,
 };
 
 //행 데이터(임시)
 const rows = [
-  createData(1,'BBQ','02-1234-5678','서울시 강남구',1, '2021.04.12~2021.04.18','길주현'),
+  createData(1,'BBQ','02-1234-5678','서울시 강남구',1),
   createData(2,'BHC','02-1234-5678','서울시 강남구',1),
   createData(3,'네네치킨','02-1234-5678','서울시 강남구',1),
   createData(4,'굽네치킨','02-1234-5678','서울시 강남구',1),
@@ -88,7 +81,7 @@ const rows = [
 ];
 
 //메인
-export default function Accumulate_table() {
+export default function Modal_table() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);
@@ -105,20 +98,14 @@ export default function Accumulate_table() {
   return (
     <div>
         <TableContainer component={Paper} className={classes.container}>
-
-        <Table className={classes.table} size="small" aria-label="collapsible table">
-
         <Table size="small" aria-label="collapsible table">
-
             <TableHead>
             <TableRow>
-                <TableCell>번호</TableCell>
-                <TableCell >매장명</TableCell>
+                <TableCell align="center">번호</TableCell>
+                <TableCell align="center">매장명</TableCell>
                 <TableCell align="center">전화번호</TableCell>
                 <TableCell align="center">주소</TableCell>
-                <TableCell align="center">거리</TableCell>
-                <TableCell align="center">달성일</TableCell>
-                <TableCell align="center">담당사원</TableCell>
+                <TableCell align="center">진행도</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
