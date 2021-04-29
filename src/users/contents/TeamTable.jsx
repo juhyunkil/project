@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper,Table,TableBody,TableCell,TableContainer,TablePagination,TableRow,TableHead,TableSortLabel} 
+import {Paper,Table,TableBody,TableCell,TableContainer,TablePagination,TableRow,TableHead} 
 from '@material-ui/core';
 import {ProgressBarCell} from "../../common/ProgressBarCell";
 
@@ -36,6 +36,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function PopModal(id) {
+  return(
+    console.log(id)
+  )
+}
+
 export default function StickyHeadTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -68,7 +74,7 @@ export default function StickyHeadTable() {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow hover key={row.id}>
+                <TableRow hover key={row.id} onClick={e => PopModal(row.id)}>
                   {columns.map((column) => {
                     const value = row[column.field];
                     const fieldName = column.field;
@@ -79,9 +85,9 @@ export default function StickyHeadTable() {
                       } 
                     else{
                         return (
-                            <TableCell key={column.field}>
-                              {column.format && typeof value === 'number' ? column.format(value) : value}
-                            </TableCell>
+                          <TableCell key={column.field}>
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                          </TableCell>
                         )
                     };
                   })}
