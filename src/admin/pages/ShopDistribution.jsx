@@ -12,13 +12,16 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
+    },
+    thirdPaper: {
+        padding: theme.spacing(1),
+        minHeight:350,
     }
 }));
 
-export default function Shops1() {
+export default function ShopDistribution() {
     const classes = useStyles();
     const [selectedId,setSelectedId] = useState('');
-    //const[상태변수,갱신함수] = useState(상태초기값)
     
     return (
 
@@ -36,7 +39,7 @@ export default function Shops1() {
                 </Grid>
                 
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}>
+                    <Paper className={classes.paper,classes.thirdPaper}>
                         <Shop2TableUnder/>
                     </Paper>
                 </Grid>

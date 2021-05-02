@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Grid} from '@material-ui/core';
 import moment from 'moment';
 
-import TeamRate from '../contents/TeamRate';
-import TeamTable from '../contents/TeamTable';
+import TeamRate from '../contents/MyRate';
+import TeamTable from '../contents/ProgressTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
