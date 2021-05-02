@@ -28,7 +28,7 @@ export default function Shop2Table(props) {
             columns={columns}
             rowHeight={45} 
             pageSize={4}
-            onRowClick={e => props.setSelectedId(e.row.id)}
+            onRowClick={e => props.setSelectedId(e.row.name)}
             hideFooterSelectedRowCount = {true}
         />
     </div>

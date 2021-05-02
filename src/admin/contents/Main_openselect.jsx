@@ -78,7 +78,7 @@ export default function CustomizedSelects() {
         <BootstrapInput id="demo-customized-textbox" />
       </FormControl>
       <FormControl className={classes.margin}>
-        <Button variant="contained" color="primary">직원추가</Button>
+        <Button variant="contained" color="primary">검색</Button>
       </FormControl>
     </div>
   );

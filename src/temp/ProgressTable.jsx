@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Table,TableBody,TableCell,TableContainer,TablePagination,TableRow,TableHead} 
 from '@material-ui/core';
-import {ProgressBarCell} from "../../common/ProgressBarCell";
+import {ProgressBarCell} from "./ProgressBarCell";
 
 const columns = [
     { field: 'id', headerName: '사원번호', width: 130},
@@ -42,7 +42,7 @@ function PopModal(id) {
   )
 }
 
-export default function StickyHeadTable() {
+export default function UserMain() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

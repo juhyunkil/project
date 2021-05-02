@@ -17,12 +17,10 @@ const SideBar = ({ isOpen, toggle }) => (
     <div className="side-menu">
       <Nav vertical className="list-unstyled pb-4">
         <NavItem>
-          <NavLink tag={Link} to={"/main"}>
+          <NavLink tag={Link} to={"/userMain"}>
             메인화면
           </NavLink>
         </NavItem>
-
-        <SubMenu title="영업" items={submenus} />
         
         <NavItem>
           <NavLink tag={Link} to={"/myPage"}>
@@ -34,11 +32,5 @@ const SideBar = ({ isOpen, toggle }) => (
   </div>
 );
 
-const submenus = [
-    {
-      title: "팀현황",
-      target: "team"
-    }
-];
 
 export default SideBar;
