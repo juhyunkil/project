@@ -105,9 +105,6 @@ export default function Accumulate_table() {
   return (
     <div>
         <TableContainer component={Paper} className={classes.container}>
-
-        <Table className={classes.table} size="small" aria-label="collapsible table">
-
         <Table size="small" aria-label="collapsible table">
 
             <TableHead>
