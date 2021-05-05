@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Worker2_table from "../contents/Worker2_table";
 import Button from '@material-ui/core/Button';
-
+import Modal from '@material-ui/core/Modal';
 
 
 const useStyles = makeStyles((theme) => ({
