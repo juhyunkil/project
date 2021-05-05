@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    minHeight: 130,
+  },
+  header: {
+    margin:'auto',
   },
 }));
 
@@ -22,15 +26,13 @@ export default function Shop2Info(props) {
         <Grid container spacing={2} item xs={12}>
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
-                    사원 : {props.selectedId}
+                    <h2 className={classes.header}>선택 사원 : {props.selectedId}</h2>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                    <Button variant="contained" size="large" color="primary">
-                        할당
-                    </Button>
-                </Paper>
+              <Button variant="contained" size="large" color="primary">
+                  할당
+              </Button>
             </Grid>
         </Grid>
     </div>

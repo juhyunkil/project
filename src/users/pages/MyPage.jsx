@@ -1,8 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { Grid, Paper } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import {makeStyles} from '@material-ui/core/styles';
+import {TextField,Button,Grid, Paper} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Workers2() {
+export default function MyPage() {
   const classes = useStyles();
+  const info = {name:'길주현',email:'gmail.com',auth:'대리',phone:'01012345678',location:'인천시'};
 
   return (
     <div className={classes.root}>
@@ -38,8 +37,10 @@ export default function Workers2() {
             direction="column"
             className={classes.paper}>
                 <TextField
-                    id="outlined-full-width"
+                    disabled
+                    id="name"
                     label="성명"
+                    defaultValue={info.name}
                     style={{ margin: 8 }}
                     margin="normal"
                     InputLabelProps={{
@@ -48,18 +49,10 @@ export default function Workers2() {
                     variant="outlined"
                 />
                 <TextField
-                    id="outlined-full-width"
-                    label="사원번호"
-                    style={{ margin: 8 }}
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    variant="outlined"
-                />
-                <TextField
-                    id="outlined-full-width"
+                    disabled
+                    id="email"
                     label="이메일 주소"
+                    defaultValue={info.email}
                     style={{ margin: 8 }}
                     fullWidth
                     margin="normal"
@@ -69,8 +62,10 @@ export default function Workers2() {
                     variant="outlined"
                 />
                 <TextField
-                    id="outlined-full-width"
+                    disabled
+                    id="auth"
                     label="직급"
+                    defaultValue={info.auth}
                     style={{ margin: 8 }}
                     margin="normal"
                     InputLabelProps={{
@@ -79,8 +74,9 @@ export default function Workers2() {
                     variant="outlined"
                 />
                 <TextField
-                    id="outlined-full-width"
+                    id="phone"
                     label="핸드폰 번호"
+                    defaultValue={info.phone}
                     style={{ margin: 8 }}
                     margin="normal"
                     InputLabelProps={{
@@ -89,18 +85,9 @@ export default function Workers2() {
                     variant="outlined"
                 />
                 <TextField
-                    id="outlined-full-width"
-                    label="생년 월일 6자리"
-                    style={{ margin: 8 }}
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    variant="outlined"
-                />
-                <TextField
-                    id="outlined-full-width"
+                    id="location"
                     label="직원위치"
+                    defaultValue={info.location}
                     style={{ margin: 8 }}
                     fullWidth
                     margin="normal"
