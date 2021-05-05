@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Team() {
+export default function UserMainRate() {
     const classes = useStyles();
     const MyProgressRate = 70;
     

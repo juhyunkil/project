@@ -28,11 +28,13 @@ class App extends Component {
         {/*영업자 페이지 컴포넌트<UsersPage/>*/}
 
 
-        <UsersPage/>
-        {/* <AdminPage/> */}
+
+        {/* <UsersPage/> */}
+        <AdminPage/>
 
 
         {/* <AdminPage/> */}
+
       </div>
     );
   }

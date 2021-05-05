@@ -84,16 +84,16 @@ const rows = [
 export default function Modal_table() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
   
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
   
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
-    };
+    // const handleChangeRowsPerPage = (event) => {
+    //   setRowsPerPage(+event.target.value);
+    //   setPage(0);
+    // };
   
   return (
     <div>
@@ -119,12 +119,12 @@ export default function Modal_table() {
         </TableContainer>
         <TablePagination
             component="div"
-            rowsPerPageOptions={[10,20,30]}
+            rowsPerPageOptions={10}
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+            // onChangeRowsPerPage={handleChangeRowsPerPage}
         />
     </div>
   );
