@@ -105,7 +105,13 @@ export default function Accumulate_table() {
   return (
     <div>
         <TableContainer component={Paper} className={classes.container}>
-          <Table size="small" aria-label="collapsible table">
+
+
+        {/* <Table className={classes.table} size="small" aria-label="collapsible table"></Table> */}
+
+        <Table size="small" aria-label="collapsible table">
+
+
             <TableHead>
               <TableRow>
                   <TableCell>번호</TableCell>
