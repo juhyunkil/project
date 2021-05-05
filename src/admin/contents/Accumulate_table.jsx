@@ -88,7 +88,7 @@ const rows = [
 ];
 
 //메인
-export default function Shop3Table() {
+export default function Accumulate_table() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const rowsPerPage = 20;
