@@ -9,12 +9,12 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing.unit * 2,
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
     thirdPaper: {
-        padding: theme.spacing(1),
+        padding: theme.spacing.unit * 1,
         minHeight:350,
     }
 }));
@@ -35,7 +35,7 @@ export default function ShopDistribution() {
                 </Grid>
                 
                 <Grid item xs={5}>
-                        <Shop2Info selectedId={selectedId}/>
+                    <Shop2Info selectedId={selectedId}/>
                 </Grid>
                 
                 <Grid item xs={12}>

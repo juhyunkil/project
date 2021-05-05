@@ -2,12 +2,11 @@ import React from "react";
 import classNames from "classnames";
 import { Container } from "reactstrap";
 import { Switch, Route } from "react-router-dom";
-import Main from '../pages/Main';
+import AdminMain from '../pages/AdminMain';
 
-import Shop1 from '../pages/Shop1';
+import TotalShop from '../pages/TotalShop';
 import ShopDistribution from '../pages/ShopDistribution';
-
-import Shop_accumulate from '../pages/Shop_accumulate';
+import ShopAccumulate from '../pages/ShopAccumulate';
 import Workers1 from '../pages/Workers1';
 import Workers2 from '../pages/Workers2';
 import NotFound from '../../common/NotFound';
@@ -18,12 +17,11 @@ const Content = ({ sidebarIsOpen, toggleSidebar }) => (
     className={classNames("content", { "is-open": sidebarIsOpen })}
   >
     <Switch>
-      <Route exact path="/" component={() => <Main/>} />
-      <Route exact path="/main" component={() => <Main/>} />
-      <Route exact path="/shop1" component={() => <Shop1/>} />
-      <Route exact path="/ShopDistribution" component={() => <ShopDistribution/>} />
-
-      <Route exact path="/shop_accumulate" component={() => <Shop_accumulate/>} />
+      <Route exact path="/" component={() => <AdminMain/>} />
+      <Route exact path="/adminMain" component={() => <AdminMain/>} />
+      <Route exact path="/totalShop" component={() => <TotalShop/>} />
+      <Route exact path="/shopDistribution" component={() => <ShopDistribution/>} />
+      <Route exact path="/shopAccumulate" component={() => <ShopAccumulate/>} />
       <Route exact path="/workers1" component={() => <Workers1/>} />
       <Route exact path="/workers2" component={() => <Workers2/>} />
       <Route path="*" component={NotFound}/>

@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 const BootstrapInput = withStyles((theme) => ({
   root: {
     'label + &': {
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing.unit * 3,
     },
   },
   input: {
@@ -47,7 +47,7 @@ const BootstrapInput = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(2),
+    margin: theme.spacing.unit * 2,
   },
 }));
 

@@ -88,18 +88,13 @@ const rows = [
 ];
 
 //메인
-export default function Accumulate_table() {
+export default function Shop3Table() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const rowsPerPage = 20;
   
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
-    };
-  
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
     };
   
   return (
@@ -128,12 +123,11 @@ export default function Accumulate_table() {
         </TableContainer>
         <TablePagination
             component="div"
-            rowsPerPageOptions={[10,20,30]}
+            rowsPerPageOptions={[20]}
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
         />
     </div>
   );
