@@ -2,79 +2,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import {Box,Collapse,IconButton,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Typography,Paper,Checkbox,TablePagination} 
+  from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Checkbox from '@material-ui/core/Checkbox';
-import { Tab } from 'bootstrap';
 
-const useRowStyles = makeStyles({
+const useStyles = makeStyles({
   root: {
     '& > *': {
       borderBottom: 'unset',
     },
   },
+  container: {
+    height: 340,
+  },
+  table: {
+    minWidth: 700,
+  },
 });
 
 function createData(No, ShopName, ShopTel, ShopAddress, ShopProgress, Check) {
   return {
-    No,
-    ShopName,
-    ShopTel,
-    ShopAddress,
-    ShopProgress,
-    Check,
+    No,ShopName,ShopTel,ShopAddress,ShopProgress,Check,
     history: [
       { date: '2020-04-23', result: '진행완료', user: '김철수' },
       { date: '2020-04-24', result: '진행실패', user: '김영희' },
     ],
   };
 }
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-  const classes = useRowStyles();
+  const classes = useStyles();
 
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
-        <TableCell component="th" scope="row">
-          {row.No}
-        </TableCell>
+        <TableCell component="th" scope="row">{row.No}</TableCell>
         <TableCell>{row.ShopName}</TableCell>
         <TableCell>{row.ShopTel}</TableCell>
         <TableCell>{row.ShopAddress}</TableCell>
@@ -139,6 +104,7 @@ Row.propTypes = {
     Check: PropTypes.number.isRequired,
   }).isRequired,
 };
+
 const rows = [
   createData(1,'BBQ','02-0000-0000','서울특별시','신규','check'),
   createData(2,'BBQ','02-0000-0000','서울특별시','신규','check'),
@@ -152,26 +118,47 @@ const rows = [
   createData(10,'BBQ','02-0000-0000','서울특별시','신규','check'),
 ];
 
-export default function Shops1Table() {
+export default function Shop1Table() {
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const rowsPerPage = 20;
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell>No</TableCell>
-            <TableCell>매장명</TableCell>
-            <TableCell>전화번호</TableCell>
-            <TableCell>주소</TableCell>
-            <TableCell>진행내역</TableCell>
-            <TableCell>선택</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <TableContainer component={Paper} className={classes.container}>
+        <Table className={classes.table} size="small" aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell>No</TableCell>
+              <TableCell>매장명</TableCell>
+              <TableCell>전화번호</TableCell>
+              <TableCell>주소</TableCell>
+              <TableCell>진행내역</TableCell>
+              <TableCell>선택</TableCell>
+            </TableRow>
+          </TableHead>
+          
+          <TableBody>
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                return (
+                  <Row key={row.name} row={row} />
+                );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+      component="div"
+      count={rows.length}
+      rowsPerPageOptions={20}
+      rowsPerPage={rowsPerPage}
+      page={page}
+      onChangePage={handleChangePage}
+    />
+  </div>
   );
 }
