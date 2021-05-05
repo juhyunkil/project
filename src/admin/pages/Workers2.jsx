@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Worker2_table from "../contents/Worker2_table";
 import Button from '@material-ui/core/Button';
+import { Alert } from 'bootstrap';
 
 
 
@@ -35,7 +36,8 @@ export default function Workers2() {
               직원추가
             </Button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary"
+              >
               직원삭제
             </Button>
           </Grid>
