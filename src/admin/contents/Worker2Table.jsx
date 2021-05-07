@@ -1,4 +1,4 @@
-//Workers1Table
+//Workers2Table
 import React from 'react';
 import PropTypes from 'prop-types';
 import {  makeStyles } from '@material-ui/core/styles';
@@ -10,11 +10,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Modal_info_table from '../contents/Modal_info_table';
-import Modal_table from '../contents/Modal_table'
 import Paper from '@material-ui/core/Paper';
 import Modal from '@material-ui/core/Modal';
 import Grid from '@material-ui/core/Grid';
+import Workers2ModalModify from './Workers2ModalModify';
 
 function createData(No, UserName, Auth, Mail, Progress) {
   return { No, UserName, Auth, Mail, Progress };
@@ -144,7 +143,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper1: {
     width: '100%',
-    maxHeight: '620px',
+    maxHeight: '100%',
     marginBottom: theme.spacing(2),
   },
   table: {
@@ -169,7 +168,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Workers1Table() {
+export default function Workers2Table() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -192,8 +191,8 @@ export default function Workers1Table() {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <Grid >
-        <Modal_info_table/>
-        <Modal_table/>
+        <Workers2ModalModify/>
+  
       </Grid>
     </div>
   );

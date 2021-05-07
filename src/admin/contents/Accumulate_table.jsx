@@ -91,21 +91,22 @@ const rows = [
 export default function Accumulate_table() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const rowsPerPage = 20;
   
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
   
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
-    };
-  
   return (
     <div>
         <TableContainer component={Paper} className={classes.container}>
-        <Table size="small" aria-label="collapsible table">         
+
+
+
+        {/* <Table className={classes.table} size="small" aria-label="collapsible table"></Table> */}
+
+        <Table size="small" aria-label="collapsible table">
+
             <TableHead>
               <TableRow>
                   <TableCell>번호</TableCell>
@@ -129,12 +130,11 @@ export default function Accumulate_table() {
 
         <TablePagination
             component="div"
-            rowsPerPageOptions={[10,20,30]}
+            rowsPerPageOptions={[20]}
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
         />
     </div>
   );

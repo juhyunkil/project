@@ -14,7 +14,7 @@ const SideBar = ({ isOpen, toggle }) => (
       <Nav vertical className="list-unstyled pb-4">
 
         <NavItem>
-          <NavLink tag={Link} to={"/main"}>
+          <NavLink tag={Link} to={"/adminMain"}>
             메인화면
           </NavLink>
         </NavItem>
@@ -30,15 +30,15 @@ const submenus = [
   [
     {
       title: "전체매장",
-      target: "shop1"
+      target: "totalShop"
     },
     {
       title: "매장분배",
-      target: "ShopDistribution"
+      target: "shopDistribution"
     },
     {
       title: "누적달성매장",
-      target: "shop_accumulate"
+      target: "shopAccumulate"
     }
   ],
   [

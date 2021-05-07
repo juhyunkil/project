@@ -49,15 +49,10 @@ const useStyles = makeStyles({
 export default function UserMainTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const rowsPerPage = 10;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
   };
 
   return (
@@ -107,9 +102,9 @@ export default function UserMainTable() {
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
+        rowsPerPageOptions={[10]}
         page={page}
         onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </Paper>
   );
