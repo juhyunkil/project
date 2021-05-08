@@ -7,7 +7,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 
-
 const useStyles = makeStyles({
   root: {
     '& > *': {
@@ -15,7 +14,7 @@ const useStyles = makeStyles({
     },
   },
   container: {
-    maxHeight: 290,
+    maxHeight: 340,
   },
   table: {
     minWidth: 700,
@@ -130,25 +129,19 @@ const rows = [
 ];
 
 //메인
-export default function Shop1TableUnder() {
+export default function Shop2TableUnder() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const rowsPerPage = 20;
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
-    };
-  
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
     };
   
   return (
     <div>
         <TableContainer component={Paper} className={classes.container}>
         <Table className={classes.table} size="small" aria-label="collapsible table">
-            <caption>할당 전 목표 설정 매장 리스트</caption>
             
             <TableHead>
               <TableRow>
@@ -165,7 +158,7 @@ export default function Shop1TableUnder() {
             <TableBody>
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     return (
-                        <Row key={row.shopName} row={row} />
+                      <Row key={row.shopName} row={row} />
                     );
                 })}
             </TableBody>
@@ -174,13 +167,12 @@ export default function Shop1TableUnder() {
         </TableContainer>
         
         <TablePagination
-            component="div"
-            rowsPerPageOptions={[10,20,30]}
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+          component="div"
+          count={rows.length}
+          rowsPerPageOptions={20}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
         />
     </div>
   );

@@ -2,21 +2,21 @@ import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 
 const columns = [
-  { field: 'id', headerName: '사원번호', width: 130, sortable:false },
-  { field: 'name', headerName: '사원명', width: 130 },
-  { field: 'auth', headerName: '직급', width: 100, sortable:false },
-  { field: 'mail', headerName: '이메일', width: 130, sortable:false },
+  { field: 'name', headerName: '사원명', width: 140 },
+  { field: 'auth', headerName: '직급', width: 130, sortable:false },
+  { field: 'phone', headerName: '핸드폰', width: 180, sortable:false },
+  { field: 'mail', headerName: '이메일', width: 225, sortable:false },
 ];
 
 const rows = [
-  { id: 1123, name: 'kim', auth: '팀장', age: 20, mail:'mail.gmail.com' },
-  { id: 2464, name: 'doo', auth: '대리', age: 20, mail:'mail.gmail.com' },
-  { id: 3446, name: 'hong', auth: '대리', age: 20, mail:'mail.gmail.com' },
-  { id: 4884, name: 'kil', auth: '대리', age: 20, mail:'mail.gmail.com' },
-  { id: 4242, name: 'kang', auth: '팀장', age: 20, mail:'mail.gmail.com' },
-  { id: 5432, name: 'lee', auth: '대리', age: 20, mail:'mail.gmail.com' },
-  { id: 7876, name: 'choi', auth: '대리', age: 20, mail:'mail.gmail.com' },
-  { id: 9695, name: 'park', auth: '대리', age: 20, mail:'mail.gmail.com' },
+  { id: 1, name: 'kim', auth: '팀장', phone: '010-1234-5678', mail:'mail.gmail.com' },
+  { id: 2, name: 'doo', auth: '대리', phone: '010-2234-5678', mail:'mail.gmail.com' },
+  { id: 3, name: 'hong', auth: '대리', phone: '010-3234-5678', mail:'mail.gmail.com' },
+  { id: 4, name: 'kil', auth: '대리', phone: '010-4234-5678', mail:'mail.gmail.com' },
+  { id: 5, name: 'kang', auth: '팀장', phone: '010-5234-5678', mail:'mail.gmail.com' },
+  { id: 6, name: 'lee', auth: '대리', phone: '010-6234-5678', mail:'mail.gmail.com' },
+  { id: 7, name: 'choi', auth: '대리', phone: '010-7234-5678', mail:'mail.gmail.com' },
+  { id: 8, name: 'park', auth: '대리', phone: '010-8234-5678', mail:'mail.gmail.com' },
 ];
 
 export default function Shop2Table(props) {
@@ -28,7 +28,7 @@ export default function Shop2Table(props) {
             columns={columns}
             rowHeight={45} 
             pageSize={4}
-            onRowClick={e => props.setSelectedId(e.row.id)}
+            onRowClick={e => props.setSelectedId(e.row.name)}
             hideFooterSelectedRowCount = {true}
         />
     </div>

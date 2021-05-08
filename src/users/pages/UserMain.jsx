@@ -3,15 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Grid} from '@material-ui/core';
 import moment from 'moment';
 
-import TeamRate from '../contents/TeamRate';
-import TeamTable from '../contents/TeamTable';
+import UserMainRate from '../contents/UserMainRate';
+import UserMainTable from '../contents/UserMainTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
@@ -21,10 +21,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontSize: '35px',
     background: "#9fd8ac",
+  },
+  thirdPaper:{
+    minHeight:420,
+    padding: theme.spacing(1),
   }
 }));
 
-export default function Team() {
+export default function UserMain() {
     const classes = useStyles();
     const today = moment().format('YYYY-MM-DD');
     
@@ -35,10 +39,10 @@ export default function Team() {
                     <Paper className={classes.datePaper}>{today}</Paper>
                 </Grid>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}><TeamRate/></Paper>
+                    <Paper className={classes.paper}><UserMainRate/></Paper>
                 </Grid>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}><TeamTable/></Paper>
+                    <Paper className={classes.paper,classes.thirdPaper}><UserMainTable/></Paper>
                 </Grid>
             </Grid>
         </div>

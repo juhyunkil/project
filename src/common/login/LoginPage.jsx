@@ -1,40 +1,70 @@
-import React from "react";
-import { connect } from "react-redux";
-import LoginForm from "./LoginForm";
-import { withRouter, Redirect } from "react-router-dom";
+import React, { useState } from 'react';
+import { Paper,Grid,makeStyles,TextField,Button } 
+  from '@material-ui/core';
 
-const LoginPage = ({ user, history, login }) => {
-  if (user.role) {
-    return <Redirect to="/user" />;
-  }/*
-  else if (user.role) {
-    return <Redirect to="/admin"/>;
-  }*/
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: "auto",
+    width: "auto",
+    paddingTop: theme.spacing.unit * 10,
+  },
+  paper: {
+    margin: "auto",
+    padding: theme.spacing(7),
+    textAlign: 'center',
+  },
+  formUnit: {
+    marginTop : '15px',
+  },
+  button: {
+    backgroundColor: '#28a745',
+  }
+}));
+
+
+export default function CenteredGrid() {
+  const classes = useStyles();
+  
 
   return (
-    <div>
-      <h2 className="text-center">LOGIN</h2>
-      <br />
-      <LoginForm user={user} onLoginClicked={user => login(user)} />
+    <div className={classes.root}>
+      <Grid container>
+        <Grid item>
+          <Paper className={classes.paper}>
+            <h1>영업관리</h1>
+            <form noValidate autoComplete="off">
+              <div className={classes.formUnit}>
+                <TextField 
+                  required 
+                  id="email" 
+                  label="E-mail" 
+                  variant="outlined" 
+                />
+              </div>
+              <div className={classes.formUnit}>
+                <TextField 
+                  required 
+                  id="pasword" 
+                  label="Password" 
+                  type="password" 
+                  variant="outlined" 
+                />
+              </div>
+              <div className={classes.formUnit}>
+                <Button 
+                  className={classes.button}
+                  variant="contained" 
+                  color="primary"
+                  type="submit" 
+                  fullWidth
+                >
+                  Login
+                </Button>
+              </div>
+            </form>
+          </Paper>
+        </Grid>
+      </Grid>
     </div>
   );
-};
-
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    login: user => dispatch({ type: "USER_LOGIN_REQUESTED", user })
-  };
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(LoginPage)
-);
+}

@@ -91,35 +91,32 @@ const rows = [
 export default function Accumulate_table() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const rowsPerPage = 20;
   
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
-    };
-  
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
     };
   
   return (
     <div>
         <TableContainer component={Paper} className={classes.container}>
 
-        <Table className={classes.table} size="small" aria-label="collapsible table">
+
+        {/* <Table className={classes.table} size="small" aria-label="collapsible table"></Table> */}
 
         <Table size="small" aria-label="collapsible table">
 
+
             <TableHead>
-            <TableRow>
-                <TableCell>번호</TableCell>
-                <TableCell >매장명</TableCell>
-                <TableCell align="center">전화번호</TableCell>
-                <TableCell align="center">주소</TableCell>
-                <TableCell align="center">거리</TableCell>
-                <TableCell align="center">달성일</TableCell>
-                <TableCell align="center">담당사원</TableCell>
-            </TableRow>
+              <TableRow>
+                  <TableCell>번호</TableCell>
+                  <TableCell >매장명</TableCell>
+                  <TableCell align="center">전화번호</TableCell>
+                  <TableCell align="center">주소</TableCell>
+                  <TableCell align="center">거리</TableCell>
+                  <TableCell align="center">달성일</TableCell>
+                  <TableCell align="center">담당사원</TableCell>
+              </TableRow>
             </TableHead>
             <TableBody>
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
@@ -128,16 +125,15 @@ export default function Accumulate_table() {
                     );
                 })}
             </TableBody>
-        </Table>
+          </Table>
         </TableContainer>
         <TablePagination
             component="div"
-            rowsPerPageOptions={[10,20,30]}
+            rowsPerPageOptions={[20]}
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
         />
     </div>
   );
