@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Grid} from '@material-ui/core';
 import moment from 'moment';
+import 'moment/locale/ko';
 
 import UserMainRate from '../contents/UserMainRate';
 import UserMainTable from '../contents/UserMainTable';
@@ -17,9 +18,8 @@ const useStyles = makeStyles((theme) => ({
   },
   datePaper:{
     padding: theme.spacing(1),
-    marginLeft: '40%',
     textAlign: 'center',
-    fontSize: '35px',
+    fontSize: '25px',
     background: "#9fd8ac",
   },
   thirdPaper:{
@@ -30,13 +30,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserMain() {
     const classes = useStyles();
-    const today = moment().format('YYYY-MM-DD');
-    
+    const today = moment().locale('ko').format("YYYY년MM월DD일 ddd요일");
+    const startDate = moment().locale('ko').day(1).format("YYYY년MM월DD일 ddd요일");
+    const endDate = moment().locale('ko').day(5).format("YYYY년MM월DD일 ddd요일");
+
     return (
         <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid item xs={8}>
-                    <Paper className={classes.datePaper}>{today}</Paper>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <Paper className={classes.datePaper}>
+                      오늘 날짜 : {today} 
+                      &nbsp; &nbsp; &nbsp;
+                      달성 기간 : {startDate} ~ {endDate}
+                    </Paper>
                 </Grid>
                 <Grid item xs={12}>
                     <Paper className={classes.paper}><UserMainRate/></Paper>

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   titlepaper:{
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 1,
     marginLeft: '40%',
     textAlign:'center',
     fontSize: '35px',
@@ -56,26 +56,26 @@ export default function ShopAccumulate() {
         <table className={classes.table}>
           <tr>
             <th className={classes.head}>지역</th>
-            <td><TextField id="location" variant="outlined" size="small"/></td>
+            <td><input id="shopLocation" label="name"/></td>
           </tr>
           <tr>
             <th className={classes.head}>매장명</th>
             <td className={classes.col}>
-              <TextField id="shopName"  variant="outlined" size="small"/>
+              <input id="shopName" label="name"/>
             </td>
           </tr>
           <tr>
             <th className={classes.head}>진행기간</th>
             <td className={classes.col}>
-              <TextField id="period1" variant="outlined" size="small"/>
+              <input id="startPeriod" label="name"/>
               ~
-              <TextField id="period2" variant="outlined" size="small"/>
+              <input id="endPeriod" label="name"/>
             </td>
           </tr>
           <tr>
             <th className={classes.head}>담당사원명</th>
             <td className={classes.col}>
-              <TextField id="workerName" variant="outlined" size="small"/>
+              <input id="workerName" label="name"/>
             </td>
           </tr>
         </table>  
@@ -85,7 +85,7 @@ export default function ShopAccumulate() {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         <Grid item xs={8}>
           <Paper className={classes.titlepaper}>
             2021 1분기 달성 매장 리스트

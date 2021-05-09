@@ -4,6 +4,8 @@ import { TableCell } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
+const colors = {'pre':'#B21F00','progress':'#C9DE00','complete':'#2FDE00','fail':'#212529'};
+
 const styles = theme => ({
   progressBarCell: {
     paddingLeft: theme.spacing.unit,
@@ -13,22 +15,19 @@ const styles = theme => ({
 });
 
 export const ProgressCircleCellBase = ({ value, classes, style }) => (
-  
   <TableCell
     className={classes.progressBarCell}
     style={style}
     align="center"
   >
-    <FiberManualRecordIcon/>
+    <FiberManualRecordIcon style={{color:colors[value]}}/>
   </TableCell>
 );
+
 ProgressCircleCellBase.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   style: PropTypes.object,
-};
-ProgressCircleCellBase.defaultProps = {
-  style: {},
 };
 
 export const ProgressCircleCell = withStyles(styles, { name: 'ProgressCircleCell' })(ProgressCircleCellBase);

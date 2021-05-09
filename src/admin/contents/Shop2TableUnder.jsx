@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import {Box,Collapse,IconButton,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Typography,Paper,TablePagination} 
+import {Box,Collapse,IconButton,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Typography,Paper,TablePagination,Checkbox} 
     from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import {ProgressCircleCell} from "../../common/ProgressCircleCell";
 
 
 const useStyles = makeStyles({
@@ -26,8 +27,8 @@ function createData(shopName, shopNumber, address, distance) {
   return {
     shopName,shopNumber,address,distance,
     history: [
-      { date: '2020-01-05', workerId: '4110', process: 3 },
-      { date: '2020-01-02', workerId: '1535', process: 1 },
+      { date: '2020-01-05', workerName: '김민수',phone:'01012345678', progress: 'fail' },
+      { date: '2020-01-02', workerName: '김철수',phone:'01087654321', progress: 'complete' },
     ],
   };
 }
@@ -41,7 +42,7 @@ function Row(props) {
   return (
     <React.Fragment>
       {/*메인테이블*/}  
-      <TableRow className={classes.root}>
+      <TableRow hover className={classes.root}>
         <TableCell padding="checkbox">
         </TableCell>
         <TableCell>
@@ -53,32 +54,35 @@ function Row(props) {
         <TableCell align="center">{row.shopNumber}</TableCell>
         <TableCell align="center">{row.address}</TableCell>
         <TableCell align="center">{row.distance}</TableCell>
+        <TableCell padding="checkbox"><Checkbox/></TableCell>
       </TableRow>
 
       {/*보조테이블*/}
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
                 영업진행이력
               </Typography>
-              <Table size="small" aria-label="purchases">
+              <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>진행날짜</TableCell>
-                    <TableCell>담당직원</TableCell>
-                    <TableCell align="right">진행도</TableCell>
+                    <TableCell align="center">진행날짜</TableCell>
+                    <TableCell align="center">담당직원</TableCell>
+                    <TableCell align="center">핸드폰</TableCell>
+                    <TableCell align="center">진행도</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
+                    <TableRow key={historyRow.phone}>
+                      <TableCell component="th" scope="row" align="center">
                         {historyRow.date}
                       </TableCell>
-                      <TableCell>{historyRow.workerId}</TableCell>
-                      <TableCell align="right">{historyRow.process}</TableCell>
+                      <TableCell align="center">{historyRow.workerName}</TableCell>
+                      <TableCell align="center">{historyRow.phone}</TableCell>
+                      <ProgressCircleCell value={historyRow.progress}/>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -101,7 +105,7 @@ Row.propTypes = {
     history: PropTypes.arrayOf(
       PropTypes.shape({
         date: PropTypes.string.isRequired,
-        workerId: PropTypes.string.isRequired,
+        workerName: PropTypes.string.isRequired,
         process: PropTypes.number.isRequired,
       }),
     ).isRequired,
@@ -152,6 +156,7 @@ export default function Shop2TableUnder() {
                 <TableCell align="center">전화번호</TableCell>
                 <TableCell align="center">주소</TableCell>
                 <TableCell align="center">거리</TableCell>
+                <TableCell/>
               </TableRow>
             </TableHead>
 
