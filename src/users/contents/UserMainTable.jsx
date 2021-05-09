@@ -1,10 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper,Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
+import {Modal, Paper,Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
     from '@material-ui/core';
 import {ProgressCircleCell} from "../../common/ProgressCircleCell";
 import EditableMemoModal from "./EditableMemoModal"
 import ProgressModal from "./ProgressModal"
+
 
 
 const columns = [
@@ -17,6 +18,18 @@ const columns = [
     {id: 'memo', label: '메모', minWidth: 200, align: 'center' },
   
 ];
+
+function getModalStyle() {
+  const top = 45;
+  const left = 75;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
 
 function createData(num, name, shopNumber, address, distance, progress, memo) {
     return {num, name, shopNumber, address, distance, progress, memo};
@@ -40,23 +53,60 @@ const rows = [
   createData(15, 'BHC', '02-0000-0000', '서울시 강남구', '8', 'progress','')
 ];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
   container: {
     height: 400,
   },
-});
+  paper: {
+    position: 'absolute',
+    width: 800,
+    
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
+
+
+
 
 export default function UserMainTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 10;
 
+  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = React.useState(getModalStyle);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      {/* <TextField
+        disabled
+        id="memo"
+        label="매장 비고란"
+        multiline
+        rows={8}
+        defaultValue={props.selectedMemo?props.selectedMemo:'내용없음'}
+        className={classes.memoField}
+        variant="outlined"
+      /> */}
+    </div>
+  );
 
   return (
     <Paper className={classes.root}>
@@ -84,6 +134,7 @@ export default function UserMainTable() {
                     const value = row[column.id];
                     const fieldName = column.id;
                     if (fieldName === 'progress') {
+
                       return (
                         <TableCell key={column.field} align="center">
                           <ProgressModal value={value} selectedId={row.num}/>
@@ -97,6 +148,7 @@ export default function UserMainTable() {
                         </TableCell>
                       );
                     }  
+
                     else{
                       return (
                         <TableCell key={column.field} align="center">
