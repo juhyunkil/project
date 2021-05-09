@@ -1,11 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Typography,Paper,TablePagination} 
-    from '@material-ui/core';
+import {Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
+  from '@material-ui/core';
+import {ProgressCircleCell} from "../../common/ProgressCircleCell";
 
-
-
+import MemoModal from '../contents/MemoModal';
 
 const useStyles = makeStyles({
   root: {
@@ -14,127 +13,105 @@ const useStyles = makeStyles({
     },
   },
   container: {
-    maxHeight: 300,
+    maxHeight: 340,
   },
-
 });
 
 //데이터 함수
-function createData(num,shopName, shopNumber, address, distance,date,workID) {
-  return {
-    num,
-    shopName,
-    shopNumber,
-    address,
-    distance,
-    date,
-    workID,
-  };
+function createData(num,shopName, shopNumber, address,date,workerName,memo) {
+  return {num,shopName,shopNumber,address,date,workerName,memo};
 }
-
-//Row 함수
-function Row(props) {
-  const { row } = props;
-  const classes = useStyles();
-
-  return (
-    <React.Fragment>
-      {/*메인테이블*/}  
-      <TableRow className={classes.root}>
-        <TableCell align="center">{row.num}</TableCell>
-        <TableCell component="th" scope="row">{row.shopName}</TableCell>
-        <TableCell align="center">{row.shopNumber}</TableCell>
-        <TableCell align="center">{row.address}</TableCell>
-        <TableCell align="center">{row.distance}</TableCell>
-        <TableCell align="center">{row.date}</TableCell>
-        <TableCell align="center">{row.workID}</TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
-
-//프로퍼티 타입 명시
-Row.propTypes = {
-  row: PropTypes.shape({
-    shopName: PropTypes.string.isRequired,
-    shopNumber: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    distance: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
-    workID: PropTypes.string.isRequired,
-    num: PropTypes.number.isRequired,
-
-  }).isRequired,
-};
 
 //행 데이터(임시)
 const rows = [
-  createData(1,'BBQ','02-1234-5678','서울시 강남구',1, '2021.04.12~2021.04.18','길주현'),
-  createData(2,'BHC','02-1234-5678','서울시 강남구',1),
-  createData(3,'네네치킨','02-1234-5678','서울시 강남구',1),
-  createData(4,'굽네치킨','02-1234-5678','서울시 강남구',1),
-  createData(5,'a','02-1234-5678','서울시 강남구',1),
-  createData(6,'b','02-1234-5678','서울시 강남구',1),
-  createData(7,'c','02-1234-5678','서울시 강남구',1),
-  createData(8,'d','02-1234-5678','서울시 강남구',1),
-  createData(9,'e','02-1234-5678','서울시 강남구',1),
-  createData(10,'f','02-1234-5678','서울시 강남구',1),
-  createData(11,'g','02-1234-5678','서울시 강남구',1),
-  createData(12,'h','02-1234-5678','서울시 강남구',1),
-  createData(13,'i','02-1234-5678','서울시 강남구',1),
-  createData(14,'j','02-1234-5678','서울시 강남구',1),
-  createData(15,'k','02-1234-5678','서울시 강남구',1),
-  createData(16,'l','02-1234-5678','서울시 강남구',1),
+  createData(1,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo1'),
+  createData(2,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo2'),
+  createData(3,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo3'),
+  createData(4,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo4'),
+  createData(5,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo5'),
+  createData(6,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo6'),
+  createData(1,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo1'),
+  createData(2,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo2'),
+  createData(3,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo3'),
+  createData(4,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo4'),
+  createData(5,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo5'),
+  createData(6,'BBQ','02-1234-5678','서울시 강남구','2021.04.12~2021.04.18','길주현','memo6'),
 ];
 
-//메인
-export default function Accumulate_table() {
-    const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const rowsPerPage = 20;
-  
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
-  
+const columns = [
+  {id:'num', label: 'No.', minWidth: 50, align: 'center'},
+  {id: 'shopName', label: '매장명', minWidth: 170, align: 'center' },
+  {id: 'shopNumber', label: '전화번호', minWidth: 150, align: 'center' },
+  {id:'address', label: '주소', minWidth: 200, align: 'center'},
+  {id: 'date', label: '달성기간', minWidth: 120, align: 'center' },
+  {id: 'workerName', label: '담당사원', minWidth: 50, align: 'center' },
+  {id: 'memo', label: '메모', minWidth: 30, align: 'center' },
+];
+
+export default function AdminMainTable() {
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const rowsPerPage = 20;
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
   return (
     <div>
-        <TableContainer component={Paper} className={classes.container}>
+      <TableContainer className={classes.container}>
+        <Table stickyHeader aria-label="sticky table" size="small">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              const memo = row.memo;
+              return (
+                <TableRow hover role="checkbox" key={row.num}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    const fieldName = column.id;
 
-
-        {/* <Table className={classes.table} size="small" aria-label="collapsible table"></Table> */}
-
-        <Table size="small" aria-label="collapsible table">
-
-
-            <TableHead>
-              <TableRow>
-                  <TableCell>번호</TableCell>
-                  <TableCell >매장명</TableCell>
-                  <TableCell align="center">전화번호</TableCell>
-                  <TableCell align="center">주소</TableCell>
-                  <TableCell align="center">거리</TableCell>
-                  <TableCell align="center">달성일</TableCell>
-                  <TableCell align="center">담당사원</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-                {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    return (
-                        <Row key={row.shopName} row={row} />
-                    );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-            component="div"
-            rowsPerPageOptions={[20]}
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-        />
+                    if (fieldName === 'memo') {
+                      return (
+                        <TableCell key={column.id} align="center">
+                          <MemoModal selectedMemo={memo}/>
+                        </TableCell>
+                      );
+                    } 
+                    else{
+                        return (
+                          <TableCell key={column.id} align="center">
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                          </TableCell>
+                        )
+                    };
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        rowsPerPageOptions={[20]}
+        page={page}
+        onChangePage={handleChangePage}
+      />
     </div>
   );
 }
