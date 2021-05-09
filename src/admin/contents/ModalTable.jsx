@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
-  from '@material-ui/core';
-  
+import {Paper,Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
+    from '@material-ui/core';
 import {ProgressCircleCell} from "../../common/ProgressCircleCell";
-import MemoModal from '../contents/MemoModal';
 
 const columns = [
     {id:'num', label: 'No.', minWidth: 50, align: 'center'},
@@ -13,7 +11,7 @@ const columns = [
     {id:'address', label: '주소', minWidth: 200, align: 'center'},
     {id: 'worker', label: '담당사원', minWidth: 120, align: 'center' },
     {id: 'progress', label: '진행도', minWidth: 50, align: 'center' },
-    {id: 'memo', label: '메모', minWidth: 30, align: 'center' },
+    {id: 'memo', label: '메모', minWidth: 50, align: 'center' },
 ];
 
 function createData(num, name, shopNumber, address, worker, progress, memo) {
@@ -21,8 +19,8 @@ function createData(num, name, shopNumber, address, worker, progress, memo) {
 }
 
 const rows = [
-  createData(1, '굽네치킨', '02-0000-0000', '서울시 강남구', '김철수', 'pre','메모1'),
-  createData(2, '굽네치킨', '02-0000-0000', '서울시 강남구', '김철수', 'pre','메모2'),
+  createData(1, '굽네치킨', '02-0000-0000', '서울시 강남구', '김철수', 'pre','default'),
+  createData(2, '굽네치킨', '02-0000-0000', '서울시 강남구', '김철수', 'pre',''),
   createData(3, '네네치킨', '02-0000-0000', '서울시 강남구', '김철수', 'pre',''),
   createData(4, '네네치킨', '02-0000-0000', '서울시 강남구', '김철수', 'complete',''),
   createData(5, '보드람치킨', '02-0000-0000', '서울시 강남구', '김철수', 'complete',''),
@@ -38,16 +36,19 @@ const rows = [
   createData(15, 'BHC', '02-0000-0000', '서울시 강남구', '김철수', 'progress','')
 ];
 
-const useStyles = makeStyles((theme) => ({
-  container:{
-    maxHeight: 330,
+const useStyles = makeStyles({
+  root: {
+    width: '100%',
   },
-}));
+  container: {
+    height: '100%',
+  },
+});
 
 export default function AdminMainTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const rowsPerPage = 20;
+  const rowsPerPage = 7;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -72,25 +73,16 @@ export default function AdminMainTable() {
           </TableHead>
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              const memo = row.memo;
               return (
-                <TableRow hover role="checkbox" key={row.num}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.num}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     const fieldName = column.id;
-                    
                     if (fieldName === 'progress') {
-                      return (
-                        <ProgressCircleCell value={value}/>
-                      );
-                    } 
-                    else if (fieldName === 'memo') {
-                      return (
-                        <TableCell key={column.id} align="center">
-                          <MemoModal selectedMemo={memo}/>
-                        </TableCell>
-                      );
-                    } 
+                        return (
+                          <ProgressCircleCell value={value}/>
+                        );
+                      } 
                     else{
                         return (
                           <TableCell key={column.id} align="center">

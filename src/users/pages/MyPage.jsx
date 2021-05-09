@@ -7,24 +7,24 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing.unit*2,
     margin: 'auto',
     maxWidth: 500,
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing.unit*1,
+    marginRight: theme.spacing.unit*1,
     width: '10ch',
   },
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing.unit*1,
   },
 }));
 
 export default function MyPage() {
   const classes = useStyles();
   const info = {name:'길주현',email:'gmail.com',auth:'대리',phone:'01012345678',location:'인천시'};
-
+  
   return (
     <div className={classes.root}>
         <Grid
@@ -34,8 +34,9 @@ export default function MyPage() {
             alignItems="center"
         >
             <Paper 
-            direction="column"
-            className={classes.paper}>
+                direction="column"
+                className={classes.paper}
+            >
                 <TextField
                     disabled
                     id="name"

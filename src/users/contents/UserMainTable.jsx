@@ -2,10 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Modal, Paper,Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
     from '@material-ui/core';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import { green, yellow } from '@material-ui/core/colors';
-import ProgressModal from "./progressModal";
-import { ProgressCircleCell } from '../../common/ProgressCircleCell';
+import {ProgressCircleCell} from "../../common/ProgressCircleCell";
+import EditableMemoModal from "./EditableMemoModal"
+import ProgressModal from "./ProgressModal"
+
+
 
 const columns = [
     {id:'num', label: 'No.', minWidth: 100, align: 'center'},
@@ -36,9 +37,9 @@ function createData(num, name, shopNumber, address, distance, progress, memo) {
 
 const rows = [
   createData(1, '굽네치킨', '02-0000-0000', '서울시 강남구', '1', 'pre','default'),
-  createData(2, '굽네치킨', '02-0000-0000', '서울시 강남구', '1', 'pre',''),
-  createData(3, '네네치킨', '02-0000-0000', '서울시 강남구', '2', 'pre',''),
-  createData(4, '네네치킨', '02-0000-0000', '서울시 강남구', '2', 'complete',''),
+  createData(2, '굽네치킨', '02-0000-0000', '서울시 강남구', '1', 'pre','2'),
+  createData(3, '네네치킨', '02-0000-0000', '서울시 강남구', '2', 'pre','3'),
+  createData(4, '네네치킨', '02-0000-0000', '서울시 강남구', '2', 'complete','4'),
   createData(5, '보드람치킨', '02-0000-0000', '서울시 강남구', '3', 'complete',''),
   createData(6, '보드람치킨', '02-0000-0000', '서울시 강남구', '3', 'complete',''),
   createData(7, '치킨매니아', '02-0000-0000', '서울시 강남구', '4', 'complete',''),
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   container: {
-    maxHeight: 400,
+    height: 400,
   },
   paper: {
     position: 'absolute',
@@ -126,37 +127,34 @@ export default function UserMainTable() {
           </TableHead>
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+              const memo = row.memo;
+              return ( 
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.num}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     const fieldName = column.id;
                     if (fieldName === 'progress') {
-                        return (
-   
-                          <TableCell 
-                            key={column.field} 
-                            align="center">
-                            {/* <ProgressModal value={value}/> */}
-                            <ProgressCircleCell onClick={handleOpen} value = {value} />
-                            <Modal
-                              open={open}
-                              onClose={handleClose}
-                              aria-labelledby="simple-modal-title"
-                              aria-describedby="simple-modal-description"
-                            > 
-                              {body}
-                            </Modal>
-                          </TableCell>
-                   
-                        );
-                      } 
+
+                      return (
+                        <TableCell key={column.field} align="center">
+                          <ProgressModal value={value} selectedId={row.num}/>
+                        </TableCell>
+                      );
+                    }
+                    else if (fieldName === 'memo') {
+                      return (
+                        <TableCell key={column.field} align="center">
+                          <EditableMemoModal selectedMemo={memo} selectedId={row.num}/>
+                        </TableCell>
+                      );
+                    }  
+
                     else{
-                        return (
-                          <TableCell key={column.field} align="center">
-                            {column.format && typeof value === 'number' ? column.format(value) : value}
-                          </TableCell>
-                        )
+                      return (
+                        <TableCell key={column.field} align="center">
+                          {column.format && typeof value === 'number' ? column.format(value) : value}
+                        </TableCell>
+                      )
                     };
                   })}
                 </TableRow>

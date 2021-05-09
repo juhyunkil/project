@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { InputLabel,FormControl,TextField,NativeSelect,Button,Grid,Paper} from '@material-ui/core';
+import { FormControl,TextField,NativeSelect,Button,Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -10,18 +10,16 @@ const useStyles = makeStyles((theme) => ({
   table:{
     border:'solid 2px',
     borderCollapse: 'collapse',
-    fontSize:20,
+    fontSize:15,
     height:'100%',
   },
   head:{
     border:'solid 1px',
-    padding: theme.spacing.unit * 1,
     backgroundColor:"#9fd8ac",
     width:'30%',
   },
   col:{
     border: 'solid 1px',
-    padding: theme.spacing.unit * 1,
   },
   button:{
     width:'90%',
@@ -31,11 +29,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const options = [
+const locationOptions = [
   {location:'역삼동'},
   {location:'개포동'},
   {location:'청담동'},
   {location:'삼성동'},
+];
+
+const isObjectOptions = [
+  {isObject:'목표매장'},
+  {isObject:'비목표매장'},
 ];
 
 function SearchTable(){
@@ -43,6 +46,7 @@ function SearchTable(){
   const [state, setState] = React.useState({
     shopName: '',
     location: '',
+    isObject: '',
   });
 
   const handleChange = (event) => {
@@ -62,17 +66,14 @@ function SearchTable(){
             <NativeSelect
               value={state.location}
               onChange={handleChange}
-              inputProps={{
-                  name: 'age',
-                  id: 'age-native-label-placeholder',
-              }}
+              name="location"
               style={{width:'40%'}}
-              >
-              <option value="">선택안함</option>
-              {options.map((option) => {
+            >
+              <option value="">전체지역</option>
+              {locationOptions.map((now) => {
                 return (
-                  <option key={option.location} row={option} value={option.location}>
-                    {option.location}
+                  <option key={now.location} value={now.location}>
+                    {now.location}
                   </option>
                 );
               })}
@@ -82,7 +83,27 @@ function SearchTable(){
         <tr>
           <th className={classes.head}>매장명</th>
           <td className={classes.col}>
-            <TextField id="shopName" style={{width:'100%'}}/>
+            <input id="shopName" variant="outlined" size="small" style={{width:'40%'}}/>
+          </td>
+        </tr>
+        <tr>
+          <th className={classes.head}>매장구분</th>
+          <td className={classes.col}>
+            <NativeSelect
+              value={state.isObject}
+              onChange={handleChange}
+              name="isObject"
+              style={{width:'40%'}}
+              >
+              <option value="">전체매장</option>
+              {isObjectOptions.map((now) => {
+                return (
+                  <option key={now.isObject} value={now.isObject}>
+                    {now.isObject}
+                  </option>
+                );
+              })}
+            </NativeSelect>
           </td>
         </tr>
       </table>  
