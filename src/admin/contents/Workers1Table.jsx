@@ -1,20 +1,10 @@
 //Workers1Table
 import React from 'react';
 import PropTypes from 'prop-types';
-import {  makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
+import {  makeStyles,Table, TableBody,TableCell, TableContainer, TableHead,TablePagination,TableRow, TableSortLabel, Paper, Modal, Grid } from '@material-ui/core';
 import Modal_info_table from '../contents/Modal_info_table';
 import Modal_table from '../contents/Modal_table'
-import Paper from '@material-ui/core/Paper';
-import Modal from '@material-ui/core/Modal';
-import Grid from '@material-ui/core/Grid';
+
 
 function createData(No, UserName, Auth, Mail, Progress) {
   return { No, UserName, Auth, Mail, Progress };
@@ -149,7 +139,6 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     minWidth: 750,
-    maxHeight: 100
   },
   visuallyHidden: {
     border: 0,
@@ -166,6 +155,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#faa',
     float: 'center',
     height: theme.spacing.unit*2,
+  },
+  container:{
+    minHeight: 330,
+    
   },
 }));
 
@@ -226,11 +219,11 @@ export default function Workers1Table() {
   return (
     <div className={classes.root}>
         <Paper className={classes.paper1}>
-        <TableContainer>
+        <TableContainer className={classes.container}>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size='small'
             aria-label="enhanced table"
           >
             <EnhancedTableHead

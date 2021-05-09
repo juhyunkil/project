@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableCell } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, } from '@material-ui/core';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { green, yellow } from '@material-ui/core/colors';
+
 
 const styles = theme => ({
   progressBarCell: {
@@ -12,15 +13,25 @@ const styles = theme => ({
   },
 });
 
+
 export const ProgressCircleCellBase = ({ value, classes, style }) => (
   
-  <TableCell
-    className={classes.progressBarCell}
-    style={style}
-    align="center"
-  >
-    <FiberManualRecordIcon/>
-  </TableCell>
+<div>
+  {
+    {
+      complete:<FiberManualRecordIcon style={{color: green[500]}}/>,
+      pre:<FiberManualRecordIcon color='secondary'/>,
+      progress:<FiberManualRecordIcon style={{color: yellow[500]}}/>,
+      fail:<FiberManualRecordIcon/>,
+    }[value]
+  }
+</div>        
+
+
+    
+
+
+ 
 );
 ProgressCircleCellBase.propTypes = {
   value: PropTypes.number.isRequired,
