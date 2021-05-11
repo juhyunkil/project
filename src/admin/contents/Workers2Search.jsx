@@ -62,17 +62,14 @@ function SearchTable(){
             <NativeSelect
               value={state.location}
               onChange={handleChange}
-              inputProps={{
-                  name: 'age',
-                  id: 'age-native-label-placeholder',
-              }}
+              name="location"
               style={{width:'20%'}}
               >
               <option value="">선택안함</option>
-              {options.map((option) => {
+              {options.map((now) => {
                 return (
-                  <option key={option.location} row={option} value={option.location}>
-                    {option.location}
+                  <option key={now.location} row={now} value={now.location}>
+                    {now.location}
                   </option>
                 );
               })}

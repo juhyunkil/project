@@ -80,7 +80,10 @@ export default function Workers2ModalAdd() {
   );
 
   return (
-    <div>
+    <Grid item xs={12}>
+      <Button className={classes.button} variant="contained" style={{backgroundColor:"#9fd8ac"}} onClick={handleOpen}>
+        직원추가
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -89,9 +92,6 @@ export default function Workers2ModalAdd() {
       >
         {body}
       </Modal>
-      <Button className={classes.button} variant="contained" style={{backgroundColor:"#9fd8ac"}} onClick={handleOpen}>
-        직원추가
-      </Button>
-    </div>
+    </Grid>
   );
 }

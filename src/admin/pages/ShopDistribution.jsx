@@ -28,7 +28,7 @@ export default function ShopDistribution() {
         <div className={classes.root}>
             <Grid container spacing={2}>
                 
-                <Grid item xs={7}>
+                <Grid item xs={7}> 
                     <Paper className={classes.paper}>
                         <Shop2Table setSelectedId={setSelectedId}/>   
                     </Paper>

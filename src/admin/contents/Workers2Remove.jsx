@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Button,Grid, Modal, TextField} from '@material-ui/core/';
-import Worker2Table from "../contents/Worker2Table";
+import Worker2Table from "./Worker2Table";
 
 
 function getModalStyle() {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Workers2Delete(props) {
+export default function Workers2Remove(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -53,16 +53,17 @@ export default function Workers2Delete(props) {
        <Paper style={modalStyle} className={classes.paper}>
       <Grid container spacing={2} item xs={12}>
             <Grid item xs={12} align ='center'>
-                <Paper className={classes.headerPaper}>
+                <Paper className={classes.Paper}>
                   
-                  <h2>{props.selectedId} <br/><br/>정보를 삭제하시겠습니까?</h2>
+                  <h2>김한결 <br/><br/>정보를 삭제하시겠습니까?</h2>
                 </Paper>
             </Grid>
             <Grid item xs={12} align ='center'>
             <Button className={classes.button} variant="contained" style={{backgroundColor:"#9fd8ac"}} onClick={handleOpen}>
               예
             </Button>
-            &nbsp;&nbsp;&nbsp;&nbsp;<Button className={classes.button} variant="contained" style={{backgroundColor:"#ea5757"}} onClick={handleOpen}>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <Button className={classes.button} variant="contained" style={{backgroundColor:"#ea5757"}} onClick={handleOpen}>
               아니오
               </Button>
             </Grid>
@@ -72,7 +73,7 @@ export default function Workers2Delete(props) {
   );
 
   return (
-    <div>
+    <Grid item xs={12}>
       <Button className={classes.button} variant="contained" style={{backgroundColor:"#ea5757"}} onClick={handleOpen}>
         직원삭제
       </Button>
@@ -84,6 +85,6 @@ export default function Workers2Delete(props) {
       >
         {body}
       </Modal>
-    </div>
+    </Grid>
   );
 }

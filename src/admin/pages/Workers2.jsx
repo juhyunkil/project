@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Worker2Table from "../contents/Worker2Table";
 import Workers2Search from "../contents/Workers2Search";
 import Workers2ModalAdd from '../contents/Workers2ModalAdd';
-import Workers2Delete from '../contents/Workers2Delete';
+import Workers2Remove from '../contents/Workers2Remove';
 
 
 
@@ -34,7 +34,7 @@ export default function Workers2() {
           <Paper className={classes.paper}><Workers2Search/></Paper>
           </Grid>
           <Grid item xs align='right'>
-            <Workers2ModalAdd/> <Workers2Delete/>
+            <Workers2ModalAdd/> <Workers2Remove selectedId={selectedId}/>
           </Grid>
         </Paper>
         </Grid>        
@@ -42,7 +42,7 @@ export default function Workers2() {
       <Grid container spacing={3}>
         <Grid item xs>
           <Paper className={classes.paper}>
-              <Worker2Table/>
+              <Worker2Table setSelectedId={setSelectedId}/>
           </Paper>
         </Grid>
       </Grid>
