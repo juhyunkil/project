@@ -1,19 +1,10 @@
 //Workers2Table
 import React from 'react';
 import PropTypes from 'prop-types';
-import {  makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
-import Modal from '@material-ui/core/Modal';
-import Grid from '@material-ui/core/Grid';
+import {  makeStyles,Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, 
+  TableRow, TableSortLabel, Paper, Modal, Grid } from '@material-ui/core';
 import Workers2ModalModify from './Workers2ModalModify';
+import { DataGrid } from '@material-ui/data-grid';
 
 function createData(No, UserName, Auth, Mail, Progress) {
   return { No, UserName, Auth, Mail, Progress };
@@ -168,7 +159,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Workers2Table() {
+export default function Workers2Table(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -276,6 +267,7 @@ export default function Workers2Table() {
                         </div>
                         
                       </TableCell>
+                    
                     </TableRow>
                   );
                 })}
@@ -294,6 +286,7 @@ export default function Workers2Table() {
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
+
         />
       </Paper>
 

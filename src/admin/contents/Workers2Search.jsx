@@ -66,7 +66,7 @@ function SearchTable(){
                   name: 'age',
                   id: 'age-native-label-placeholder',
               }}
-              style={{width:'40%'}}
+              style={{width:'20%'}}
               >
               <option value="">선택안함</option>
               {options.map((option) => {
@@ -77,6 +77,9 @@ function SearchTable(){
                 );
               })}
             </NativeSelect>
+            <TextField
+            style={{width:'60%'}}
+            />
           </td>
         </tr>
       </table>  

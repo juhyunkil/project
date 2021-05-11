@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Button,Grid, Modal, TextField} from '@material-ui/core/';
+import Worker2Table from "../contents/Worker2Table";
 
 
 function getModalStyle() {
@@ -46,12 +47,15 @@ export default function Workers2Delete(props) {
     setOpen(false);
   };
 
+  const [selectedId,setSelectedId] = useState('');
+
   const body = (
        <Paper style={modalStyle} className={classes.paper}>
       <Grid container spacing={2} item xs={12}>
             <Grid item xs={12} align ='center'>
                 <Paper className={classes.headerPaper}>
-                    <h2>{props.selectedId} <br/><br/>정보를 삭제하시겠습니까?</h2>
+                  
+                  <h2>{props.selectedId} <br/><br/>정보를 삭제하시겠습니까?</h2>
                 </Paper>
             </Grid>
             <Grid item xs={12} align ='center'>
