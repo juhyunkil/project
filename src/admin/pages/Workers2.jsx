@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Worker2_table from "../contents/Worker2_table";
-import Button from '@material-ui/core/Button';
-import { Alert } from 'bootstrap';
+import Worker2Table from "../contents/Worker2Table";
+import Workers2Search from "../contents/Workers2Search";
+import Workers2ModalAdd from '../contents/Workers2ModalAdd';
+import Workers2Remove from '../contents/Workers2Remove';
 
 
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Workers2() {
   const classes = useStyles();
+  const [selectedId,setSelectedId] = useState('');
 
 
   return (
@@ -29,17 +31,10 @@ export default function Workers2() {
         <Grid item xs>
         <Paper className={classes.paper}>
           <Grid item xs>
-            사원명  <input></input> <Button variant="contained" color="primary">검색</Button>
+          <Paper className={classes.paper}><Workers2Search/></Paper>
           </Grid>
           <Grid item xs align='right'>
-            <Button variant="contained" color="primary">
-              직원추가
-            </Button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <Button variant="contained" color="primary"
-              >
-              직원삭제
-            </Button>
+            <Workers2ModalAdd/> <Workers2Remove selectedId={selectedId}/>
           </Grid>
         </Paper>
         </Grid>        
@@ -47,11 +42,10 @@ export default function Workers2() {
       <Grid container spacing={3}>
         <Grid item xs>
           <Paper className={classes.paper}>
-              <Worker2_table/>
+              <Worker2Table setSelectedId={setSelectedId}/>
           </Paper>
         </Grid>
       </Grid>
     </div>
   );
 }
-

@@ -4,7 +4,7 @@ import {Modal, Paper,Table,TableBody,TableCell,TableContainer,TableHead,TablePag
     from '@material-ui/core';
 import {ProgressCircleCell} from "../../common/ProgressCircleCell";
 import EditableMemoModal from "./EditableMemoModal"
-import ProgressModal from "./ProgressModal"
+import progressModal from "./progressModal"
 
 
 
@@ -137,7 +137,7 @@ export default function UserMainTable() {
 
                       return (
                         <TableCell key={column.field} align="center">
-                          <ProgressModal value={value} selectedId={row.num}/>
+                          <progressModal value={value} selectedId={row.num}/>
                         </TableCell>
                       );
                     }
