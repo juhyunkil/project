@@ -1,14 +1,7 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputBase from '@material-ui/core/InputBase';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import { makeStyles, withStyles,InputLabel,MenuItem,FormControl,Select,NativeSelect,InputBase,FormHelperText,Grid, Button} 
+from '@material-ui/core/styles';
+
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -46,8 +39,13 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing.unit * 2,
+
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -59,19 +57,18 @@ export default function CustomizedSelects() {
   };
   return (
     <div>
-      <FormControl className={classes.margin}>
-        <InputLabel htmlFor="demo-customized-select-native">검색기준</InputLabel>
-        <NativeSelect
-          id="demo-customized-select-native"
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">검색기준</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
           value={age}
           onChange={handleChange}
-          input={<BootstrapInput />}
         >
-          <option aria-label="None" value="" />
-          <option value={10}>전체</option>
-          <option value={20}>매장명</option>
-          <option value={30}>담당사원</option>
-        </NativeSelect>
+          <MenuItem value={10}>전체</MenuItem>
+          <MenuItem value={20}>매장명</MenuItem>
+          <MenuItem value={30}>담당사원</MenuItem>
+        </Select>
       </FormControl>
       <FormControl className={classes.margin}>
         <InputLabel htmlFor="demo-customized-textbox">검색어</InputLabel>
