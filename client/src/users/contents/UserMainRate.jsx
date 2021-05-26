@@ -1,46 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Grid} from '@material-ui/core';
+import ProgressBar from '../../common/ProgressBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(1),
+    padding: theme.spacing.unit*1,
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
   InfoPaper:{
-    padding: theme.spacing(2),
+    padding: theme.spacing.unit*1,
     textAlign: 'center',
-    fontSize: '20px',
+    fontSize: '18px',
     background: "#9fd8ac",
-  },
-  progressBar: {
-    backgroundColor: '#faa',
-    float: 'left',
-    height: theme.spacing.unit*2,
   },
 }));
 
-export default function UserMainRate() {
+export default function UserMainRate(props) {
     const classes = useStyles();
-    const MyProgressRate = 70;
-    
+    const name = props.name.workerName;
+
     return (
         <div className={classes.root}>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <Paper className={classes.InfoPaper}>
-                        길주현님의 이번주 목표 달성량은 {MyProgressRate}입니다
+                        {name}님의 이번주 목표 달성 그래프
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                    <div
-                        className={classes.progressBar}
-                        style={{ width: `${MyProgressRate}%`, height:'100%'}}
-                    >{MyProgressRate}</div>
+                  <ProgressBar progressArray={props.progress} height = {4}/>
                 </Grid>
             </Grid>
         </div>

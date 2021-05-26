@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper,Button,Grid,FormControl,TextField} from '@material-ui/core';
-import Accumulate_table from "../contents/Accumulate_table";
+import {Paper,Button,Grid,FormControl} from '@material-ui/core';
+import Shop3Table from "../contents/Shop3Table";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,7 +107,7 @@ export default function ShopAccumulate() {
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Accumulate_table/>
+            <Shop3Table/>
           </Paper>
         </Grid>
       </Grid>

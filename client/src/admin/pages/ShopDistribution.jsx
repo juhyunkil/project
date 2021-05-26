@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
     },
     thirdPaper: {
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
         padding: theme.spacing.unit * 1,
         minHeight:350,
     }
@@ -39,7 +41,7 @@ export default function ShopDistribution() {
                 </Grid>
                 
                 <Grid item xs={12}>
-                    <Paper className={classes.paper,classes.thirdPaper}>
+                    <Paper className={classes.thirdPaper}>
                         <Shop2TableUnder/>
                     </Paper>
                 </Grid>

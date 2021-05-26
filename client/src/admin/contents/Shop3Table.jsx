@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
   from '@material-ui/core';
 import {ProgressCircleCell} from "../../common/ProgressCircleCell";
-import MemoModal from '../contents/MemoModal';
+import MemoModal from './MemoModal';
 
 const useStyles = makeStyles({
   root: {
@@ -26,7 +26,7 @@ const columns = [
   {id: 'memo', label: '메모', minWidth: 30, align: 'center' },
 ];
 
-export default function AdminMainTable() {
+export default function Shop3Table() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 20;

@@ -2,50 +2,61 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal,Paper } from '@material-ui/core';
+import ViewListIcon from '@material-ui/icons/ViewList';
+import Workers1ModalBody from './Workers1ModalBody';
 
-import ModalBody from '../contents/ModalBody';
+function getModalStyle() {
+  const top = 41;
+  const left = 40;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
-    modal: {
-        position: 'absolute',
-        backgroundColor: theme.palette.background.paper,
-        border: '1px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit*2,
-    },
     modalPaper: {
-        width: '70%',
-        height: '70%',
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit*2,
+      position: 'absolute',
+      width: '70%',
+      height: '70%',
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing.unit*2,
     },
 }));
 
-export default function MemoModal(props) {
+export default function Workers1Modal(props) {
   const classes = useStyles();
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    props.setOpen(false);
+    setOpen(false);
   };
 
   const body = (
-    <Paper className={classes.modalPaper}>
-        <ModalBody selectedId={props.selectedId}/>
+    <Paper className={classes.modalPaper} style={modalStyle}>
+      <Workers1ModalBody selectedWorker={props.selectedWorker}/>
     </Paper>
   );
 
   return (
     <div>
+      <ViewListIcon onClick={handleOpen}/>
         <Modal
-            open={props.open}
+            open={open}
             onClose={handleClose}
-            className={classes.modal}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
         >
-            {body}
-        </Modal>
+          {body}
+      </Modal>
     </div>
   );
 }

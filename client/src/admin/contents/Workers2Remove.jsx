@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Button,Grid, Modal, TextField} from '@material-ui/core/';
-import Worker2Table from "./Worker2Table";
+import Workers2Table from "./Workers2Table";
 
 
 function getModalStyle() {

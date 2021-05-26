@@ -108,16 +108,25 @@ export default function Shop2TableUnder() {
       return body
     }
 
-    React.useEffect(async () => {
-      await fetch('/admin/totalShop/shop1Table')
+    
+    React.useEffect(() => {
+      async function fetchData1(){
+        await fetch('/admin/totalShop/shop1Table')
       .then(res => res.json())
       .then(res => setRows(res.row1))
-      .catch(err => console.log(err));  
+      .catch(err => console.log(err)); 
+      }  
+      fetchData1();
+    },[]);
 
-      await fetch('/admin/totalShop/shop1Table')
+    React.useEffect(() => {
+      async function fetchData2(){
+        await fetch('/admin/totalShop/shop1Table')
       .then(res => res.json())
       .then(res => setAllHistory(res.row2))
-      .catch(err => console.log(err));  
+      .catch(err => console.log(err)); 
+      }
+      fetchData2();
     },[]);
   
   return (
@@ -131,7 +140,6 @@ export default function Shop2TableUnder() {
                 <TableCell align="center">매장명</TableCell>
                 <TableCell align="center">전화번호</TableCell>
                 <TableCell align="center">주소</TableCell>
-                <TableCell/>
                 <TableCell/>
               </TableRow>
             </TableHead>

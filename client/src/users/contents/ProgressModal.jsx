@@ -1,15 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper,Table,TableBody,TableContainer,TableHead,TableRow,Modal} 
+import {Modal} 
     from '@material-ui/core';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 const colors = {'pre':'#B21F00','progress':'#C9DE00','complete':'#2FDE00','fail':'#212529'};
-const progress = {'pre':'진행전','progress':'진행중','complete':'진행완료','fail':'거래실패'};
 
 function getModalStyle() {
-  const top = 45;
-  const left = 65;
+  const top = 55;
+  const left = 75;
 
   return {
     top: `${top}%`,
@@ -21,8 +22,8 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 200,
-    height: 180,
+    width: 150,
+    height: 230,
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #000',
     boxShadow: theme.shadows[5],
@@ -46,11 +47,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProgressModal({value,selectedId}) {
-  //{selectedId} 이 값에 해당하는 데이터 db에서 찾아 값 갱신 
+export default function ProgressModal({status,selectedId}) {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const [newStatus, setNewStatus] = React.useState(status);
 
   const handleOpen = () => {
     setOpen(true);
@@ -60,41 +61,45 @@ export default function ProgressModal({value,selectedId}) {
     setOpen(false);
   };
 
-  const handleClick = () => {
-  }
+  const handleChange = (event, value) => {
+    setNewStatus(value);
+  };
+
+  React.useEffect(() => {
+    function fetchData(){
+      fetch('/users/progressModal',{
+        method: 'POST',
+        body: JSON.stringify({status:newStatus,id:selectedId}),
+        headers: {"Content-Type": "application/json"}
+      })
+      .catch(err => console.log(err));
+    }
+    fetchData();
+  }, [newStatus]);
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-        <TableContainer className={classes.container}>
-            <Table stickyHeader aria-label="sticky table" size="small">
-                <TableHead>
-                    <TableRow>
-                        현재 진행도 : {progress[value]}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow hover onClick={handleClick} value="1">
-                        <FiberManualRecordIcon style={{color:colors['pre']}}/>진행전
-                    </TableRow>
-                    <TableRow hover onClick={handleClick}>
-                        <FiberManualRecordIcon style={{color:colors['progress']}}/>진행중
-                    </TableRow>
-                    <TableRow hover onClick={handleClick}>
-                        <FiberManualRecordIcon style={{color:colors['complete']}}/>진행완료
-                    </TableRow>
-                    <TableRow hover onClick={handleClick}>
-                        <FiberManualRecordIcon style={{color:colors['fail']}}/>실패
-                    </TableRow>
-                </TableBody>
-            </Table>
-        </TableContainer>
+      <ToggleButtonGroup orientation="vertical" value={newStatus} exclusive onChange={handleChange}>
+        <ToggleButton value="pre" aria-label="pre">
+          <FiberManualRecordIcon style={{color:colors['pre']}}/>진행전
+        </ToggleButton>
+        <ToggleButton value="progress" aria-label="progress">
+          <FiberManualRecordIcon style={{color:colors['progress']}}/>진행중
+        </ToggleButton>
+        <ToggleButton value="complete" aria-label="complete">
+          <FiberManualRecordIcon style={{color:colors['complete']}}/>진행완료
+        </ToggleButton>
+        <ToggleButton value="fail" aria-label="fail">
+          <FiberManualRecordIcon style={{color:colors['fail']}}/>실패
+        </ToggleButton>
+      </ToggleButtonGroup>
     </div>
     
   );
 
   return (
     <div>
-        <FiberManualRecordIcon style={{color:colors[value]}} onClick={handleOpen}/>
+        <FiberManualRecordIcon style={{color:colors[status]}} onClick={handleOpen}/>
         <Modal
           open={open}
           onClose={handleClose}

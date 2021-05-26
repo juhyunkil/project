@@ -107,24 +107,30 @@ export default function Shop2TableUnder() {
     allHistory.map((h) =>{
       h.shopId === id ? temp['history'].push(h) : temp['history'].push()
     });
-
     body = {shopName,shopNumber,address,distance,history:temp.history}
-    console.log(body)
     return body
   }
-
-  React.useEffect(async () => {
-    await fetch('/admin/shopDistribution/shop2TableUnder')
-    .then(res => res.json())
-    .then(res => setRows(res.row1))
-    .catch(err => console.log(err));  
-
-    await fetch('/admin/shopDistribution/shop2TableUnder')
-    .then(res => res.json())
-    .then(res => setAllHistory(res.row2))
-    .catch(err => console.log(err));  
-  },[]);
   
+  React.useEffect(() => {
+    async function fetchData1(){
+      await fetch('/admin/shopDistribution/shop2TableUnder')
+      .then(res => res.json())
+      .then(res => setRows(res.row1))
+      .catch(err => console.log(err));
+    }  
+    fetchData1();
+  },[]);
+
+  React.useEffect(() => {
+    async function fetchData2(){
+      await fetch('/admin/shopDistribution/shop2TableUnder')
+      .then(res => res.json())
+      .then(res => setAllHistory(res.row2))
+      .catch(err => console.log(err)); 
+    }
+    fetchData2();
+  },[]);
+
   return (
     <div>
         <TableContainer component={Paper} className={classes.container}>

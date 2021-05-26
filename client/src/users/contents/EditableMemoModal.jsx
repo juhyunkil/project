@@ -43,7 +43,20 @@ export default function EditableMemoModal({selectedMemo,selectedId}) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [edit, setEdit] = React.useState(true);
-  const memoId = {selectedId};
+  const [memo, setMemo] = React.useState(selectedMemo ? selectedMemo : '');
+  const [newMemo, setNewMemo] = React.useState('');
+
+  React.useEffect(() => {
+    function fetchData(){
+      fetch('/users/editableMemoModal',{
+        method: 'POST',
+        body: JSON.stringify({memo:newMemo,id:selectedId}),
+        headers: {"Content-Type": "application/json"}
+      })
+      .catch(err => console.log(err));
+    }
+    fetchData();
+  }, [newMemo]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -57,23 +70,20 @@ export default function EditableMemoModal({selectedMemo,selectedId}) {
     setEdit(false);
   };
 
-  const handleSave = () => {
+  const handleSave = (target) => {
+    setNewMemo(target);
     setEdit(true);
   };
-/*
-  const handleChange = (e) => {
-    
-  };
-*/
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <form noValidate autoComplete="off">
         <TextField
           id="memo"
-          label="매장 비고란"
           multiline
           rows={8}
-          defaultValue={selectedMemo ? selectedMemo : '내용없음'}
+          value={memo}
+          onChange={(event) => setMemo(event.target.value)}
           className={classes.memoField}
           variant="outlined"
           InputProps={
@@ -83,13 +93,13 @@ export default function EditableMemoModal({selectedMemo,selectedId}) {
         <Button 
           variant="contained"
           className={classes.editButton}
-          onClick={handleEdit}
+          onClick={() => handleEdit()}
         >
           수정</Button>
         <Button 
           variant="contained" 
           className={classes.saveButton}
-          onClick={handleSave}
+          onClick={() => handleSave(memo)}
         >
           저장</Button>
       </form>

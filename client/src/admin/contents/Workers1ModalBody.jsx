@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow,Paper,Modal,Grid} 
+import {Paper,Grid} 
   from '@material-ui/core';
 
-import ModalTable from '../contents/ModalTable';
+import Workers1ModalTable from './Workers1ModalTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +36,7 @@ export default function ModalBody(props) {
                 <Paper className={classes.paper}>
                     <table className={classes.table}>
                         <tr>
-                            <td className={classes.col}>사원이름 : {props.selectedWorker.name}</td>
+                            <td className={classes.col}>사원이름 : {props.selectedWorker.workerName}</td>
                             <td className={classes.col}>직급 : {props.selectedWorker.auth}</td>
                             <td className={classes.col}>핸드폰 : {props.selectedWorker.phone}</td>
                             <td className={classes.col}>이메일 : {props.selectedWorker.email}</td>
@@ -45,7 +45,7 @@ export default function ModalBody(props) {
                 </Paper>
             </Grid>
             <Grid item xs={12}>
-                <Paper className={classes.paper}><ModalTable selectedId={props.selectedWorker.id}/></Paper>
+                <Paper className={classes.paper}><Workers1ModalTable selectedId={props.selectedWorker.id}/></Paper>
             </Grid>
         </Grid>
     </div>

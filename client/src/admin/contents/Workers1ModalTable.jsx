@@ -2,9 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
     from '@material-ui/core';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import {ProgressCircleCell} from "../../common/ProgressCircleCell";
-import MemoModal from '../contents/MemoModal';
+import MemoModal from './MemoModal';
 
 const columns = [
     {id: 'shopName', label: '매장명', minWidth: 170, align: 'center' },
@@ -26,26 +25,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ModalTable(props) {
+export default function Workers1ModalTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 7;
-  const [rows,setRows] = React.useState([]); 
-  const [completed, setCompleted] = React.useState(0);
+  const [rows,setRows] = React.useState([]);
 
-  React.useEffect(async () => {
-    await fetch(`/admin/workers1/modalTable?thisId=${props.selectedId}`)
-    .then(res => res.json())
-    .then(res => setRows(res))
-    .catch(err => console.log(err));
+  React.useEffect(() => {
+    async function fetchData1(){
+      await fetch(`/admin/workers1/modalTable?thisId=${props.selectedId}`)
+      .then(res => res.json())
+      .then(res => setRows(res))
+      .catch(err => console.log(err));
+    }  
+    fetchData1();
   },[]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-  };
-    
-  const progress = () => {
-    setCompleted({ completed: completed >= 100 ? 0 : completed + 1 });
   };
 
   return (
@@ -69,7 +66,7 @@ export default function ModalTable(props) {
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                 const memo = row.memo;
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.num}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       const fieldName = column.id;

@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import {Paper,Grid,Button,InputLabel, Select, MenuItem, FormControl, TextField} from '@material-ui/core';
+import React from 'react';
+import { makeStyles} from '@material-ui/core/styles';
+import {Paper,Grid} from '@material-ui/core';
 import {Pie} from 'react-chartjs-2';
 import moment from 'moment';
-import { green, purple } from '@material-ui/core/colors';
 import 'moment/locale/ko';
 
 import AdminMainTable from '../contents/AdminMainTable';
-import InputBase from '@material-ui/core/InputBase';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,12 +91,15 @@ export default function AdminMain() {
       ]
     }
 
-    React.useEffect(async () => {
-      await fetch('/admin/adminMain')
-      .then(res => res.json())
-      .then(res => setRows(res))
-      .catch(err => console.log(err));
-    },[]);
+    React.useEffect(() => {
+      async function fetchData(){
+        await fetch('/admin/adminMain')
+        .then(res => res.json())
+        .then(res => setRows(res))
+        .catch(err => console.log(err));
+      }
+      fetchData();
+    },[])
 
     function CircleChart(){
       return(

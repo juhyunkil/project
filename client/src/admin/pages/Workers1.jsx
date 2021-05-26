@@ -2,7 +2,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Workers1Table from '../contents/Workers1Table';
-import {Paper,Button,Grid,FormControl,TextField} from '@material-ui/core';
+import {Paper,Button,Grid,TextField} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,50 +27,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Workers1() {
   const classes = useStyles();
+  const [target,setTarget] = React.useState('');
+  const [searchName,setSearchName] = React.useState(target);
 
-  function Search() {
-    return(
-      <FormControl className={classes.formControl}>
-         <table container border="1">
-            <tr>
-                <td bgcolor="#9fd8ac">사원명</td>
-                <td>
-                  <input id="standard-basic" />
-                </td>
-            </tr>
-            <tr>
-                <td bgcolor="#9fd8ac">진척률</td>
-                <td>
-                  <input id="standard-basic" label="진척률" />
-                  ~
-                  <input id="standard-basic" label="진척률" />
-                </td>
-            </tr>
-          </table>
-      </FormControl>
-    )
-  }
-  
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Grid container>
-              <Grid item xs={10}>
-                <Search/>
-              </Grid>
-              <Grid item xs={2}>
-                <Button className={classes.button}>
+          <table container border="1">
+            <tr>
+              <td bgcolor="#9fd8ac">사원명</td>
+              <td>
+                <TextField
+                  id="target"
+                  style={{ margin: 8 }}
+                  margin="normal"
+                  onChange={(e) => setTarget(e.target.value)}
+                />
+              </td>
+              <td>
+                <Button className={classes.button} onClick={()=>setSearchName(target)}>
                   검색
                 </Button>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>  
+              </td>
+            </tr>
+            </table>
+        </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Workers1Table/>
+            <Workers1Table searchName={searchName}/>
           </Paper>
         </Grid>
       </Grid>

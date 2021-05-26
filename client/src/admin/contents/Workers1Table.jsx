@@ -1,87 +1,110 @@
 //Workers1Table
-
 import React, { useState } from 'react';
 import {  makeStyles } from '@material-ui/core/styles';
-import {Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow,Paper,Modal} 
+import {Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} 
   from '@material-ui/core';
 
-
-import ModalBody from '../contents/ModalBody';
+import Workers1Modal from './Workers1Modal';
+import ProgressBar from '../../common/ProgressBar';
 
 const columns = [
-  { field: 'workerName', headerName: '사원 명' ,width:'10%',align:'center'},
-  { field: 'auth', headerName: '직급' ,width:'10%',align:'center'},
-  { field: 'email', headerName: '메일주소' ,width:'30%',align:'center'},
+  { field: 'workerName', headerName: '사원명' ,width: '12%',align:'center'},
+  { field: 'auth', headerName: '직급' ,width:'12%',align:'center'},
+  { field: 'email', headerName: '메일주소' ,width:'23%',align:'center'},
   { field: 'phone', headerName: '핸드폰' ,width:'15%',align:'center'},
-  { field: 'progress', headerName: '진척률' ,width:'35%',align:'center'},
+  { field: 'popModal', headerName: '영업보기' ,width:'10%',align:'center'},
+  { field: 'progress', headerName: '진척률' ,width:'27%',align:'center'},
 ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
-  modalPaper: {
-    width: '70%',
-    height: '70%',
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit*2,
-  },
   table: {
     width: '100%',
-  },
-  progressBar: {
-    backgroundColor: '#faa',
-    float: 'center',
-    height: theme.spacing.unit*2,
   },
   container:{
     height: 400,
   },
-  modal: {
-    display: 'flex',
-    padding: theme.spacing(1),
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#969ea580',
-  },
 }));
 
-export default function Workers1Table() {
+
+//Row 함수
+function Row(props) {
+  const classes = useStyles();
+  const { row } = props;
+  return (
+    <React.Fragment>
+      {/*메인테이블*/}  
+      <TableRow hover className={classes.root}>
+        <TableCell align="center">{row.workerName}</TableCell>
+        <TableCell align="center">{row.auth}</TableCell>
+        <TableCell align="center">{row.email}</TableCell>
+        <TableCell align="center">{row.phone}</TableCell>
+        <TableCell align="center">
+          <Workers1Modal selectedWorker={row}/>
+        </TableCell>
+        <TableCell align="center">
+          <ProgressBar progressArray={row.progress} height={2}/>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+}
+
+export default function Workers1Table({searchName}) {
   const classes = useStyles();
   const rowsPerPage = 10;  
   const [page, setPage] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [selectedWorker,setSelectedWorker] = useState('');
   const [rows,setRows] = useState([]);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleClick = (e,selectedId) => {
-    setSelectedWorker(selectedId);
-    setOpen(true);
-  };
+  const [progressRows,setProgressRows] = useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  React.useEffect(async () => {
-    await fetch('/admin/workers1/workers1Table')
-    .then(res => res.json())
-    .then(res => setRows(res))
-    .catch(err => console.log(err));
+  React.useEffect(() => {
+    async function fetchData1(){
+      await fetch('/admin/workers1/workers1Table')
+      .then(res => res.json())
+      .then(res => setRows(res.row1))
+      .catch(err => console.log(err));
+    }  
+    fetchData1();
   },[]);
 
-  //모달창 바디
-  const body = (
-      <Paper className={classes.modalPaper}>
-        <ModalBody selectedWorker={selectedWorker}/>
-      </Paper>
-  );
-    
+  React.useEffect(() => {
+    async function fetchData1(){
+      await fetch('/admin/workers1/workers1Table')
+      .then(res => res.json())
+      .then(res => setProgressRows(res.row2))
+      .catch(err => console.log(err));
+    }  
+    fetchData1();
+  },[]);
+  
+  function CreateData(id,workerName, auth, email, phone) {
+    var progress = {'pre':0,'progress':0,'complete':0,'fail':0};
+    var body = "";
+
+    progressRows.map((p) =>{
+      p.workerId === id ? progress[p.status] += 1 : progress[p.status] += 0
+    });
+
+    body = {id,workerName,auth,email,phone,progress}
+    return body
+  }
+
+  const filteredComponents = (data) => {
+    data = data.filter((row) => {
+      return row.workerName.includes(searchName);
+    });
+    return data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+      const nowRow = CreateData(row.id,row.workerName,row.auth,row.email,row.phone)
+      return <Row key={row.id} row={nowRow} />
+    });
+  }
+
   return (
     <div>
       <TableContainer className={classes.container}>
@@ -89,58 +112,17 @@ export default function Workers1Table() {
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell key={column.field} align={column.align}>
+                <TableCell key={column.field} align={column.align} style={{ width: column.width }}>
                   {column.headerName}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              const selected = {id:row.id,name:row.workerName,auth:row.auth,email:row.email,phone:row.phone};
-              return (
-                <>
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    className={classes.modal}
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-                  >
-                    {body}
-                  </Modal>
-                  <TableRow 
-                    hover 
-                    key={row.no}
-                    onClick={e => handleClick(e,selected)}
-                  >
-                    {columns.map((column) => {
-                      const value = row[column.field];
-                      const fieldName = column.field;
-                      if (fieldName === 'Progress') {
-                          return (
-                            <TableCell key={column.field} align="center">
-                              <div
-                                className={classes.progressBar}
-                                style={{ width: `${value}%` }}
-                                title={`${value.toFixed(1)}%`}
-                              >{value}</div>
-                            </TableCell>
-                          );
-                        } 
-                      else{
-                          return (
-                            <TableCell key={column.field} align="center">
-                              {column.format && typeof value === 'number' ? column.format(value) : value}
-                            </TableCell>
-                          )
-                      };
-                    })}
-                  </TableRow>
-                </>
-              );
-            })}
+            {rows ?
+              filteredComponents(rows) :
+              <TableRow></TableRow>
+            }
           </TableBody>
         </Table>
       </TableContainer>
