@@ -1,56 +1,27 @@
 {
-  "name": "project",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/data-grid": "^4.0.0-alpha.26",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.58",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "bootstrap": "^4.6.0",
-    "chart.js": "^3.2.1",
-    "formik": "^2.2.6",
-    "jquery": "^3.6.0",
-    "moment": "^2.29.1",
-    "react": "^17.0.2",
-    "react-chartjs-2": "^3.0.3",
-    "react-dom": "^17.0.2",
-    "react-google-charts": "^3.0.15",
-    "react-redux": "^7.2.3",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "react-vis": "^1.11.7",
-    "reactstrap": "^8.9.0",
-    "redux": "^4.0.5",
-    "web-vitals": "^1.0.1",
-    "yup": "^0.32.9"
-  },
+  "name": "management",
+  "version": "1.0.0",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node index.js",
+    "client": "npm start --prefix client",
+    "server": "nodemon server.js --ignore client",
+    "dev": "concurrently -k \"npm run server\" \"npm run client\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fomantic-ui": "^2.8.7",
+    "fomantic-ui-css": "^2.8.7",
+    "mysql": "^2.18.1",
+    "react-native-multicolor-progress-bar": "^1.0.3"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-react": "^7.13.13",
+    "concurrently": "^4.1.2",
+    "grunt-connect-proxy": "git+https://github.com/drewzboto/grunt-connect-proxy.git"
+  },
+  "proxy": "http://127.0.0.1:5000/"
 }
